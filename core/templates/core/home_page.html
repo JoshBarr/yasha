@@ -3,8 +3,20 @@
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block content %}
-    <h1>{{ self.title }}</h1>
-    {{ self.body|richtext }}
 
-    <a href="#">test</a>
+    <div class="banner">
+        <div class="gutters">
+            <h1>{{ self.title }}</h1>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="gutters">
+            {{ self.body|richtext }}
+
+            <a href="#">test</a>
+
+        </div>
+    </div>
+
 {% endblock %}
