@@ -3,6 +3,6 @@ python:
   - "2.7"
 # command to install dependencies
 install:
-  - "deployment/deploy.sh requirements/production.txt"
+  - "deployment/install.sh requirements/production.txt"
 # command to run tests
 script: nosetests
