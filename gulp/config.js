@@ -1,6 +1,6 @@
 var path = require("path");
-var sourcePath = "./static_src";
-var distPath = "./static";
+var sourcePath = "./core/static_src";
+var distPath = "./core/static";
 
 var prod = process.env.NODE_ENV === 'production';
 
@@ -16,7 +16,7 @@ module.exports = {
         svg: path.join(sourcePath, "svg"),
         images: path.join(distPath, "images"),
         slug: "my-site",
-        views: "./templates",
+        views: "./core/templates",
     },
 
     PlzOptions: {
