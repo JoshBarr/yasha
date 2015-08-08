@@ -6,3 +6,5 @@ install:
   - "deployment/install.sh requirements/production.txt"
 # command to run tests
 script: nosetests
+notifications:
+  email: false
