@@ -55,7 +55,11 @@
 
         {% wagtailuserbar %}
 
+
+        <div class="">
         {% block content %}{% endblock %}
+        </div>
+
         {% compress js %}
             {% comment %}
                 You should add your generated js assets in here

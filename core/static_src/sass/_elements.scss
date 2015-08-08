@@ -29,10 +29,25 @@ body {
     position: relative;
     background-color: $color-body-bg;
     color: $color-text;
-    font-family: $font-family-primary;
+    // font-family: $font-family-primary;
+    font-family: "proxima-nova", sans-serif;
     font-weight: $font-weight-normal;
     line-height: $line-height-base;
 }
+
+
+
+h1, h2, h3 {
+    font-family: "ff-karbid-slab-web-pro";
+    font-weight: 400;
+}
+
+
+a {
+    color: #2db89b;
+    text-decoration: none;
+}
+
 
 
 ::selection {
