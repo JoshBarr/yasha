@@ -33,7 +33,7 @@ Now you're ready to clone the project and get your Vagrant machine up and runnin
 
 ```
   $ cd [my-dev-environment]
-  $ git clone git@github.com:springload/yasha.git
+  $ git clone git@github.com:joshbarr/yasha.git
   $ cd yasha
   $ vagrant up
   [..... wait until everything gets installed]
@@ -92,33 +92,7 @@ host    all         all            10.0.2.2/24           trust
 host    all         all         127.0.0.1/32          trust
 ```
 
-## Media folder synced to a Delila preview site
 
-Edit the `Vagrantfile` and uncomment the following line:
-
-```
-config.vm.synced_folder "/Volumes/Preview Sites/" + PROJECT_NAME + "/media/", "/home/vagrant/" + PROJECT_NAME + "/media" 
-```
-
-Your path to the mounted folder might be different, just edit the first argument according to it.
-
-Now edit the `yasha/settings/base.py` and uncomment the following line:
-
-```
-# MEDIA_ROOT = join(PROJECT_ROOT, WAGTAIL_SITE_NAME.lower(), 'media')
-```
-
-Restart vagrant check it's working. If you get an error while runnning `vagrant up` like this:
-
-![Mounted volume error](http://i.imgur.com/0SXZ0ff.png)
-
-Just make sure the preview sites folder is properly mounted in your host machine. In MacOS it is usally not unless you open the folder with Finder.
-
-If you want to run the server using the delila settings (database mostly) use:
-
-```
-  $ djrun
-```
 
 ## Tips
 
