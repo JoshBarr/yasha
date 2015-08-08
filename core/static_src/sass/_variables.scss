@@ -1,0 +1,49 @@
+// ----------------------------------------------------------------------------
+// Variables
+// ----------------------------------------------------------------------------
+
+
+// Colours
+
+$color-stage-bg:    #fff;
+$color-body-bg:     #f5f5f5;
+
+$color-text:        #333;
+$color-text-muted:  lighten($color-text, 10%);
+
+$color-headlines:   #3F3F3F;
+
+$color-links:       #1ba1ee;
+$color-links-hover: darken($color-links, 10%);
+
+$color-hr:          rgba(0, 0, 0, 0.1);
+
+$color-focus:       #6cc6ee;
+$color-select:      #e5e5e5;
+
+
+// Fonts
+
+$font-family-sans-serif:  'Roboto', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-family-serif:       'Georgia', 'Times New Roman', Times, serif;
+$font-family-primary:     $font-family-sans-serif;
+
+$font-size-base:          16; //px
+$line-height-base:        1.4;
+$line-height-headline:    1.2;
+
+$font-weight-normal:      400;
+$font-weight-bold:        700;
+
+
+
+// Spacing
+
+$spacing: 1.5rem;
+
+
+
+// Easing
+
+$easing-circ:       cubic-bezier(0.075, 0.820, 0.165, 1.000);
+

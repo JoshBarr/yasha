@@ -1,0 +1,16 @@
+// ----------------------------------------------------------------------------
+// Functions
+// ----------------------------------------------------------------------------
+
+
+// convert pixel to em
+@function em($size, $emBase:16) {
+    $emSize: $size / $emBase;
+    @return #{$emSize}em;
+}
+
+// convert pixel to rem
+@function rem($size) {
+    $remSize: $size / 16;
+    @return #{$remSize}rem;
+}

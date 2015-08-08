@@ -1,0 +1,98 @@
+// ----------------------------------------------------------------------------
+// Utilities
+// ----------------------------------------------------------------------------
+
+.u-clearfix,
+%clearfix {
+    &:after {
+        display: block;
+        // height: 0;
+        content: '';
+        clear: both;
+    }
+}
+
+.u-inline-block,
+%inline-block {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+%spacing {
+    margin-bottom: $spacing;
+}
+
+%no-top-first {
+    &:first-child {
+        margin-top: 0;
+    }
+}
+
+.u-center {
+    text-align: center;
+}
+
+.u-middle > * {
+    vertical-align: middle;
+}
+
+.u-strong {
+    font-weight: 600;
+}
+
+.u-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.u-hide {
+    display: none;
+}
+
+.u-right {
+    text-align: right;
+}
+
+.u-overflow {
+    overflow: hidden;
+}
+
+.u-tight {
+    margin-bottom: .25em;
+}
+
+
+
+// * 1. Ensures text doesn't wrap and break your layout
+// * 2. Trigger overflow behavior
+// * 3. Truncate the text
+.u-truncate {
+    white-space: nowrap;            // [1]
+    overflow: hidden;               // [2]
+    text-overflow: ellipsis;        // [3]
+}
+
+
+// An accessible label that takes up no visual space
+.u-accessible,
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+
+// Prevent all user interaction with the element
+.disabled,
+.u-disabled {
+    pointer-events: none;
+    cursor: default;
+    opacity: .5;
+}
+

@@ -1,0 +1,79 @@
+// -----------------------------------------------------------------------------
+// Radio picker
+// -----------------------------------------------------------------------------
+//
+// Turns a group of radio elements into big tappable regions, while still being
+// accessible through keyboard navigation:
+//
+// <div class="radio-picker">
+//     <label>
+//         <input class="radio-picker__input" type="radio" name="" checked="checked">
+//         <span class="radio-picker__body">
+//             Rich context goes here!
+//         </span>
+//     </label>
+//     <label>
+//         <input class="radio-picker__input" type="radio" name="" checked="checked">
+//         <span class="radio-picker__body">
+//             Rich context goes here!
+//         </span>
+//     </label>
+// </div>
+
+$color-radio-picker-border: #dfdfdf;
+$color-radio-picker-border-checked: #d2d2d2;
+$color-radio-picker-bg: #eaeaea;
+$color-radio-picker-bg-hover: #fafafa;
+$color-radio-picker-bg-checked: #fff;
+
+.radio-picker > label,
+.radio-picker__item {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    margin-left: 0;
+    margin-bottom: 1.5em;
+}
+
+    .radio-picker__input {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: block;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        -webkit-appearance: none;
+        appearance: none;
+        cursor: pointer;
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+
+    .radio-picker__input:focus {
+        outline: none;
+    }
+
+    .radio-picker__body {
+        padding: 1em;
+        border: solid 1px $color-radio-picker-border;
+        background-color: $color-radio-picker-bg;
+        border-radius: .25em;
+    }
+
+    /*
+        Note that :checked isn't supported by IE8 so you'll need to implement
+        some JavaScript to add the `.checked` class to the input.
+    */
+    .radio-picker__input:checked + .radio-picker__body,
+    .radio-picker__input.checked + .radio-picker__body {
+        background-color: $color-radio-picker-bg-checked;
+        border-color: $color-radio-picker-border-checked;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .radio-picker__input:hover + .radio-picker__body {
+        background-color: $color-radio-picker-bg-hover;
+    }
+
+

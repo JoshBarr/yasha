@@ -1,0 +1,151 @@
+// -----------------------------------------------------------------------------
+// Modal lightboxes
+// -----------------------------------------------------------------------------
+//
+// As of 2015, the vertical-align: middle table is still the best cross-browser
+// way to vertically centre stuff. This modal component uses this pattern with
+// the following structure:
+//
+// <div class="modal modal--active">
+//     <div class="modal__table">
+//         <div class="modal__center">
+//             <div class="modal__content">
+//                 Hello!
+//             </div>
+//         </div>
+//     </div>
+// </div>
+//
+// Requires '_animations.scss';
+
+
+$z-index-modal: 11;
+$z-index-modal-matte: 1;
+$z-index-modal-content: 2;
+
+$color-modal-close-bg: #333;
+$color-modal-close-text: #fff;
+$color-modal-content-bg: #fff;
+
+.u-body-modal-active {
+    height: 100%;
+    overflow: hidden;
+}
+
+.modal {
+    animation: modal-in .15s ease-out 0s backwards;
+    background: rgba(255, 255, 255, .93);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: $z-index-modal;
+}
+
+// To close the modal, apply the modal--exit class and wait for the
+// animationEnd event to fire
+
+.modal--exit {
+    animation: modal-out .4s ease-out 0.4s forwards;
+
+    .modal__content {
+        animation: affordance-out .4s ease-in 0s forwards;
+    }
+
+    .modal__close {
+        animation: affordance-out-right .4s ease-in 0s forwards;
+    }
+}
+
+
+.modal__table {
+    display: table;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    position: relative;
+    z-index: $z-index-modal-content;
+}
+
+.modal__center {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    animation: modal-in .15s ease-out .25s backwards;
+}
+
+.modal__content {
+    animation: affordance-in .5s $easing-circ .3s backwards;
+    display: inline-block;
+    min-width: 10.5em;
+    max-width: 32em;
+    min-height: 6em;
+    background: $color-modal-content-bg;
+    padding: 1em 2em;
+
+    @include large {
+        position: relative;
+    }
+}
+
+
+.modal__close {
+    animation: affordance-in-right .5s $easing-circ .25s backwards;
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: $color-modal-close-text;
+    padding: .9rem 1.35rem 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    background: $color-modal-close-bg;
+    z-index: $z-index-modal-content;
+    font-size: 1em;
+
+    @include medium {
+        font-size: 2em;
+    }
+
+    &:hover {
+        background: darken($color-modal-close-bg, 5%);
+        color: #fff;
+    }
+
+    &:active {
+        background: #222;
+    }
+}
+
+
+
+// Unfortunte hack for IE8. When will this blasted browser die?
+
+%ie8-matte {
+    display: block;
+    position: absolute;
+    z-index: $z-index-modal-matte;
+    background: #fff;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: .93;
+    zoom: 1;
+}
+
+
+.ie8 {
+    .matte-opaque {
+        @extend %ie8-matte;
+    }
+    .matte-translucent {
+        @extend %ie8-matte;
+        opacity: .5;
+        z-index: 3;
+    }
+}
+
+
+
+
