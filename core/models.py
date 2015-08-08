@@ -72,7 +72,8 @@ class HomePage(Page):
         description = "The top level homepage for your site"
         verbose_name = "Homepage"
 
-    body = RichTextField(default='')
+    # body = RichTextField(default='')
+    body = models.CharField(max_length=255, help_text="Test text")
     date = models.DateField("Post date", default=date.today)
     search_fields = ()
 

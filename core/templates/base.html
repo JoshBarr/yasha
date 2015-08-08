@@ -7,7 +7,7 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        
+
         <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_suffix %}{% endblock %}</title>
         <meta name="description" content="{% if self.search_description %}{{ self.search_description }}{% elif self.intro %}{{ self.intro }}{% elif self.body_excerpt %}{{ self.body_excerpt|truncatewords:40 }}{% else %}{{ self.title }}{% endif %}" />
 
@@ -32,9 +32,13 @@
         {% endblock %}
         <!-- end:open graph -->
 
+
+        <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300,100' rel='stylesheet' type='text/css'>
+
+
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {% compress css %}
-
+         <link rel='stylesheet' type='text/css' href='{% static 'css/screen.css' %}'>
         {% endcompress %}
         {% block extra_css %}
         {% endblock %}
@@ -48,7 +52,7 @@
             <!-- Google Tag Manager -->
             <!-- End Google Tag Manager -->
         {% endif %}
-        
+
         {% wagtailuserbar %}
 
         {% block content %}{% endblock %}
@@ -60,5 +64,10 @@
         {% endcompress %}
         {% block extra_js %}
         {% endblock %}
+
+        <script src="//use.typekit.net/mij2rid.js"></script>
+<script>try{Typekit.load({ async: true });}catch(e){}</script>
+
+
     </body>
 </html>
