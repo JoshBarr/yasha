@@ -95,3 +95,8 @@ docs/_build/
 
 # PyBuilder
 target/
+
+core/static/css/
+core/static/js/
+
+
