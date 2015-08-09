@@ -16,7 +16,7 @@ SETTINGS=$3
 
 # Install requirements in case there are new dependencies or updates
 if [ -f requirements/production.txt ]; then
-    pip2.7 install -r requirements/production.txt
+    ~/bin/pip2.7 install -r requirements/production.txt
 fi
 
 # Check for migrations
