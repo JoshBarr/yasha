@@ -4,6 +4,7 @@
 # Example:
 # $ ./deploy.sh site site.co.nz site.settings.production
 # It could be improved but it's a starting point
+cd ~/webapps/yasha/
 
 USERNAME=$1
 DOMAIN=$2
