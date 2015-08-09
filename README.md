@@ -1,3 +1,5 @@
+[ ![Codeship Status for JoshBarr/yasha](https://codeship.com/projects/667f3860-2070-0133-3aaa-0eade5a669ff/status?branch=master)](https://codeship.com/projects/95696)
+
 
 yasha
 ==================
