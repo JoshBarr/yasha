@@ -20,7 +20,7 @@ if [ -f requirements/production.txt ]; then
 fi
 
 # Check for migrations
-output="$(./manage.py migrate --settings=${SETTINGS}  --list | grep "\[ ]" | wc -l)"
+output="$(python2.7 manage.py migrate --settings=${SETTINGS}  --list | grep "\[ ]" | wc -l)"
 
 if [ $output -ge 1 ]
 then
@@ -29,9 +29,9 @@ else
   echo "No migrations to run"
 fi
 
-# A bit of clean-up tasks
-./manage.py collectstatic --noinput --settings=$SETTINGS
-./manage.py compress --settings=$SETTINGS
-./manage.py update_index --settings=$SETTINGS
+# A bit of clean-up
+python2.7 manage.py collectstatic --noinput --settings=$SETTINGS
+python2.7 manage.py compress --settings=$SETTINGS
+python2.7 manage.py update_index --settings=$SETTINGS
 
 # deactivate
