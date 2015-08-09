@@ -2,7 +2,7 @@
 
 # This script needs the following 3 parameters to work properly: USERNAME, DOMAIN, SETTINGS
 # Example:
-# $ ./deploy.sh buildability buildability.co.nz buildability.settings.production
+# $ ./deploy.sh site site.co.nz site.settings.production
 # It could be improved but it's a starting point
 
 USERNAME=$1
@@ -10,12 +10,12 @@ DOMAIN=$2
 SETTINGS=$3
 
 # Activate virtual environment
-source /var/www/$USERNAME/venvs/$DOMAIN/bin/activate
-cd /var/www/$USERNAME/$DOMAIN/$USERNAME
+# source /var/www/$USERNAME/venvs/$DOMAIN/bin/activate
+# cd /var/www/$USERNAME/$DOMAIN/$USERNAME
 
 # Install requirements in case there are new dependencies or updates
 if [ -f requirements/production.txt ]; then
-    pip install -r requirements/production.txt
+    pip2.7 install -r requirements/production.txt
 fi
 
 # Check for migrations
@@ -33,4 +33,4 @@ fi
 ./manage.py compress --settings=$SETTINGS
 ./manage.py update_index --settings=$SETTINGS
 
-deactivate
+# deactivate
