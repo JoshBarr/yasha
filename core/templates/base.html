@@ -60,11 +60,7 @@
         {% block content %}{% endblock %}
         </div>
 
-        <div class="footer section">
-            <div class="gutters">
-                <h4>Yasha</h4>
-            </div>
-        </div>
+        {% include "core/includes/footer.html" %}
 
         {% compress js %}
             {% comment %}
