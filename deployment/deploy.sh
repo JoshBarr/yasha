@@ -4,7 +4,7 @@
 # Example:
 # $ ./deploy.sh site site.co.nz site.settings.production
 # It could be improved but it's a starting point
-cd ~/webapps/yasha/
+cd /home/django/yasha
 
 USERNAME=$1
 DOMAIN=$2
@@ -16,11 +16,11 @@ SETTINGS=$3
 
 # Install requirements in case there are new dependencies or updates
 if [ -f requirements/production.txt ]; then
-    ~/bin/pip2.7 install -r requirements/production.txt
+    pip install -r requirements/production.txt
 fi
 
 # Check for migrations
-output="$(python2.7 manage.py migrate --settings=${SETTINGS}  --list | grep "\[ ]" | wc -l)"
+output="$(python manage.py migrate --settings=${SETTINGS}  --list | grep "\[ ]" | wc -l)"
 
 if [ $output -ge 1 ]
 then
@@ -30,8 +30,8 @@ else
 fi
 
 # A bit of clean-up
-python2.7 manage.py collectstatic --noinput --settings=$SETTINGS
-python2.7 manage.py compress --settings=$SETTINGS
-python2.7 manage.py update_index --settings=$SETTINGS
+python manage.py collectstatic --noinput --settings=$SETTINGS
+python manage.py compress --settings=$SETTINGS
+python manage.py update_index --settings=$SETTINGS
 
 # deactivate
