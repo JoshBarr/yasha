@@ -3,19 +3,19 @@ from __future__ import unicode_literals
 
 from django.db import models, migrations
 import datetime
-import modelcluster.fields
 import wagtail.wagtailcore.fields
-import django.db.models.deletion
 import modelcluster.contrib.taggit
+import django.db.models.deletion
+import modelcluster.fields
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wagtailimages', '0005_make_filter_spec_unique'),
-        ('taggit', '0001_initial'),
-        ('wagtailcore', '0010_change_page_owner_to_null_on_delete'),
-        ('wagtaildocs', '0002_initial_data'),
+        ('taggit', '0002_auto_20150616_2121'),
+        ('wagtailimages', '0006_add_verbose_names'),
+        ('wagtaildocs', '0003_add_verbose_names'),
+        ('wagtailcore', '0001_squashed_0016_change_page_url_path_to_text_field'),
     ]
 
     operations = [
@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
             name='HomePage',
             fields=[
                 ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
-                ('body', wagtail.wagtailcore.fields.RichTextField(default=b'')),
+                ('body', models.CharField(help_text=b'Test text', max_length=255)),
                 ('date', models.DateField(default=datetime.date.today, verbose_name=b'Post date')),
             ],
             options={
@@ -37,7 +37,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('link_external', models.URLField(help_text=b'Set an external link if you want the link to point somewhere outside the CMS.', null=True, verbose_name=b'External link', blank=True)),
-                ('link_email', models.EmailField(help_text=b'Set the recipient email address if you want the link to send an email.', max_length=75, null=True, blank=True)),
+                ('link_email', models.EmailField(help_text=b'Set the recipient email address if you want the link to send an email.', max_length=254, null=True, blank=True)),
                 ('link_phone', models.CharField(help_text=b'Set the number if you want the link to dial a phone number.', max_length=20, null=True, blank=True)),
                 ('explicit_name', models.CharField(help_text=b'If you want a different name than the page title.', max_length=64, null=True, blank=True)),
                 ('short_name', models.CharField(help_text=b'If you need a custom name for responsive devices.', max_length=32, null=True, blank=True)),
@@ -48,7 +48,6 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Menu item',
                 'description': 'Elements appearing in the main menu',
             },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='NavigationMenu',
@@ -60,20 +59,6 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Navigation menu',
                 'description': 'Navigation menu',
             },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='NavigationMenuMenuElement',
-            fields=[
-                ('menuelement_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='core.MenuElement')),
-                ('sort_order', models.IntegerField(null=True, editable=False, blank=True)),
-                ('parent', modelcluster.fields.ParentalKey(related_name='menu_items', to='core.NavigationMenu')),
-            ],
-            options={
-                'ordering': ['sort_order'],
-                'abstract': False,
-            },
-            bases=('core.menuelement', models.Model),
         ),
         migrations.CreateModel(
             name='PageCarouselItem',
@@ -88,7 +73,6 @@ class Migration(migrations.Migration):
                 'ordering': ['sort_order'],
                 'abstract': False,
             },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='PageRelatedLink',
@@ -96,7 +80,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('sort_order', models.IntegerField(null=True, editable=False, blank=True)),
                 ('link_external', models.URLField(help_text=b'Set an external link if you want the link to point somewhere outside the CMS.', null=True, verbose_name=b'External link', blank=True)),
-                ('link_email', models.EmailField(help_text=b'Set the recipient email address if you want the link to send an email.', max_length=75, null=True, blank=True)),
+                ('link_email', models.EmailField(help_text=b'Set the recipient email address if you want the link to send an email.', max_length=254, null=True, blank=True)),
                 ('link_phone', models.CharField(help_text=b'Set the number if you want the link to dial a phone number.', max_length=20, null=True, blank=True)),
                 ('title', models.CharField(help_text=b'Link title', max_length=255)),
                 ('link_document', models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.SET_NULL, blank=True, to='wagtaildocs.Document', help_text=b'Choose an existing document if you want the link to open a document.', null=True)),
@@ -105,7 +89,6 @@ class Migration(migrations.Migration):
                 'ordering': ['sort_order'],
                 'abstract': False,
             },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='PageTag',
@@ -115,7 +98,6 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
             },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='YashaPage',
@@ -134,46 +116,52 @@ class Migration(migrations.Migration):
             },
             bases=('wagtailcore.page',),
         ),
+        migrations.CreateModel(
+            name='NavigationMenuMenuElement',
+            fields=[
+                ('menuelement_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='core.MenuElement')),
+                ('sort_order', models.IntegerField(null=True, editable=False, blank=True)),
+                ('parent', modelcluster.fields.ParentalKey(related_name='menu_items', to='core.NavigationMenu')),
+            ],
+            options={
+                'ordering': ['sort_order'],
+                'abstract': False,
+            },
+            bases=('core.menuelement', models.Model),
+        ),
         migrations.AddField(
             model_name='pagetag',
             name='content_object',
             field=modelcluster.fields.ParentalKey(related_name='tagged_items', to='core.YashaPage'),
-            preserve_default=True,
         ),
         migrations.AddField(
             model_name='pagetag',
             name='tag',
             field=models.ForeignKey(related_name='core_pagetag_items', to='taggit.Tag'),
-            preserve_default=True,
         ),
         migrations.AddField(
             model_name='pagerelatedlink',
             name='link_page',
             field=models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.SET_NULL, blank=True, to='wagtailcore.Page', help_text=b'Choose an existing page if you want the link to point somewhere inside the CMS.', null=True),
-            preserve_default=True,
         ),
         migrations.AddField(
             model_name='pagerelatedlink',
             name='page',
             field=modelcluster.fields.ParentalKey(related_name='related_links', to='core.YashaPage'),
-            preserve_default=True,
         ),
         migrations.AddField(
             model_name='pagecarouselitem',
             name='page',
             field=modelcluster.fields.ParentalKey(related_name='carousel_items', to='core.YashaPage'),
-            preserve_default=True,
         ),
         migrations.AddField(
             model_name='menuelement',
             name='link_document',
             field=models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.SET_NULL, blank=True, to='wagtaildocs.Document', help_text=b'Choose an existing document if you want the link to open a document.', null=True),
-            preserve_default=True,
         ),
         migrations.AddField(
             model_name='menuelement',
             name='link_page',
             field=models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.SET_NULL, blank=True, to='wagtailcore.Page', help_text=b'Choose an existing page if you want the link to point somewhere inside the CMS.', null=True),
-            preserve_default=True,
         ),
     ]
