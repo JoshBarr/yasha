@@ -10,6 +10,7 @@ USERNAME=$1
 DOMAIN=$2
 SETTINGS=$3
 
+sudo yasha
 # Activate virtual environment
 source yashaenv/bin/activate
 # cd /var/www/$USERNAME/$DOMAIN/$USERNAME
