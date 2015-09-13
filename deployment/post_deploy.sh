@@ -1,6 +1,6 @@
 #!/bin/bash
-cd /home/django/yasha
+cd /home/yasha/yasha
 # Flush cache, deactivate venv and restart services
 redis-cli FLUSHALL
-service uwsgi restart
+service gunicorn restart
 service nginx restart

@@ -4,14 +4,14 @@
 # Example:
 # $ ./deploy.sh site site.co.nz site.settings.production
 # It could be improved but it's a starting point
-cd /home/django/yasha
+cd /home/yasha/yasha
 
 USERNAME=$1
 DOMAIN=$2
 SETTINGS=$3
 
 # Activate virtual environment
-# source /var/www/$USERNAME/venvs/$DOMAIN/bin/activate
+source yashaenv/bin/activate
 # cd /var/www/$USERNAME/$DOMAIN/$USERNAME
 
 # Install requirements in case there are new dependencies or updates
@@ -34,4 +34,4 @@ python manage.py collectstatic --noinput --settings=$SETTINGS
 python manage.py compress --settings=$SETTINGS
 python manage.py update_index --settings=$SETTINGS
 
-# deactivate
+deactivate
