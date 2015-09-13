@@ -10,7 +10,6 @@ USERNAME=$1
 DOMAIN=$2
 SETTINGS=$3
 
-su yasha
 # Activate virtual environment
 source yashaenv/bin/activate
 # cd /var/www/$USERNAME/$DOMAIN/$USERNAME
@@ -36,3 +35,7 @@ python manage.py compress --settings=$SETTINGS
 python manage.py update_index --settings=$SETTINGS
 
 deactivate
+
+redis-cli FLUSHALL
+service gunicorn restart
+service nginx restart
