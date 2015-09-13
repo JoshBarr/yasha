@@ -1,10 +1,10 @@
 {
-  "name": "frontend-starter-kit",
+  "name": "Yasha",
   "version": "0.0.1",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/springload/frontend-starter-kit"
+    "url": "https://github.com/joshbarr/yasha"
   },
   "engines": {
     "node": "0.12"
