@@ -10,11 +10,11 @@
 
     <div class="banner banner--inverse banner-large">
 
+        {% navigation_menu 'top' self %}
+
         <div class="banner__background">
             {% image self.banner_image width-1200 %}
         </div>
-
-        {% navigation_menu 'top' self %}
 
         <div class="banner__content gutters section">
             <h1>{{ self.headline }}</h1>

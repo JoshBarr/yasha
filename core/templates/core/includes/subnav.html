@@ -1,0 +1,12 @@
+{% if children|length > 0 %}
+    <ul class='nav nav--wide'>
+        <li>
+            <strong>In this section:</strong>
+        </li>
+        {% for page in children %}
+            <li>
+                <a href="{{ page.url }}" title="">{{ page.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

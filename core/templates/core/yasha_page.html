@@ -3,13 +3,19 @@
 {% load wagtailimages_tags %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
-{% block menu_class %}site-nav-dark panel-white{% endblock %}
+{% block menu %}{% endblock %}
 
 {% block content %}
 
 
-    <div class="banner">
-        <div class="banner__content gutters">
+    <div class="banner banner-medium">
+        {% navigation_menu 'top' self %}
+
+        <div class="banner__background">
+            {% image self.banner_image width-1200 %}
+        </div>
+
+        <div class="banner__content gutters section">
             {% include "core/includes/crumb.html" %}
 
             <h1>
@@ -21,6 +27,8 @@
     <div class="content">
         <div class="gutters section">
             <div class="prose">
+                {% include "core/includes/subnav.html" %}
+
                 {{ self.body|richtext}}
             </div>
         </div>

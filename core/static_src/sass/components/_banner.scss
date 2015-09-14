@@ -9,7 +9,7 @@
     // padding-bottom: 35%;
 
     .banner__content {
-        padding-top: 10%;
+        // padding-top: 10%;
     }
 }
 
@@ -25,7 +25,7 @@
      @include medium {
         // padding-bottom: 48%;
         .banner__content {
-            padding-top: 10%;
+            // padding-top: 10%;
         }
     }
 }
@@ -76,7 +76,7 @@
     // left: 0;
 
     @include medium {
-        margin-top: 5em;
+        margin-top: 2em;
         background-color: transparent;
         max-width: 55%;
     }

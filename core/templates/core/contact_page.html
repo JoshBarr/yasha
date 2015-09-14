@@ -3,11 +3,16 @@
 {% load wagtailimages_tags %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
-{% block menu_class %}panel-white site-nav-dark{% endblock %}
+{% block menu %}{% endblock %}
 
 {% block content %}
     <div class="banner">
-        <div class="banner__content gutters">
+
+        <div class='site-nav-dark'>
+        {% navigation_menu 'top' self %}
+        </div>
+
+        <div class="banner__content gutters section">
             {% include "core/includes/crumb.html" %}
 
             <h1>{{ self.title }}</h1>
