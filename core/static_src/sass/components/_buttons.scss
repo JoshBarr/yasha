@@ -49,6 +49,14 @@ $padding: 1em;
 
 .btn {
     @extend %btn;
+
+    > svg {
+        width: 1em;
+        height: 1em;
+        display: inline-block;
+        vertical-align: middle;
+        margin-top: -.125em;
+    }
 }
 
 .btn-primary {
@@ -58,6 +66,21 @@ $padding: 1em;
     &:hover {
         background-color: darken($color-brand, 5%);
     }
+}
+
+
+.btn-donate {
+    border: solid 1px;
+    line-height: 2;
+    padding-right: 1em;
+
+    svg {
+        margin-left: .25em;
+    }
+}
+
+.btn-outline {
+    border: solid 1px $color-brand;
 }
 
 // Double the padding for a wider button. Useful when the primary CTA is

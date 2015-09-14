@@ -51,6 +51,25 @@ def navigation_menu(context, menu_name=None, current_page=None):
     }
 
 
+@register.inclusion_tag('core/includes/menu_small.html', takes_context=True)
+def navigation_menu_small(context, menu_name=None, current_page=None):
+    """
+    Retrieves the MenuElement(s) under the NavigationMenu with given menu_name
+    """
+    menu_items = []
+    if menu_name is None or current_page is None:
+        return None
+    try:
+        menu_items = NavigationMenu.objects.get(menu_name=menu_name).items
+    except ObjectDoesNotExist:
+        return None
+
+    return {
+        'links': menu_items,
+        'request': context['request'],
+    }
+
+
 class SetVarNode(template.Node):
 
     def __init__(self, var_name, var_value):
@@ -101,3 +120,10 @@ def do_include_maybe(parser, token):
             return CommentNode()
     silent_node.render = wrapped_render
     return silent_node
+
+
+@register.simple_tag
+def get_param_replace(request, field, value):
+    dict_ = request.GET.copy()
+    dict_[field] = value
+    return dict_.urlencode()

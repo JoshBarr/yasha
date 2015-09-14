@@ -1,0 +1,33 @@
+{% load core_tags %}
+
+<ul class="nav pagination">
+    {% if pages.previous_page_number > 0 %}
+    <li>
+        <a href="{{ request.path }}?{% get_param_replace request 'page' pages.previous_page_number %}" class="text-muted pagination__arrow icon-text -tiny" data-bind-keyboard="ARROW_LEFT">
+            <svg class='icon'><use xlink:href="#caret-l" /></svg><!--
+        /--><span>
+                Prev
+            </span>
+        </a>
+    </li>
+    {% endif %}
+
+    {% for page in pagination %}
+    <li>
+        <a href="{{ request.path }}?{% get_param_replace request 'page' page.number %}" class="pagination__number {% if page.active %}pagination__active{% else %}text-muted{% endif %}">
+            {{ page.number }}
+        </a>
+    </li>
+    {% endfor %}
+
+    {% if pages.next_page_number > 1 and pages.next_page_number <= pages.paginator.num_pages %}
+    <li>
+        <a href="{{ request.path }}?{% get_param_replace request 'page' pages.next_page_number %}" class="text-muted pagination__arrow icon-text -tiny" data-bind-keyboard="ARROW_RIGHT">
+            <span>
+                Next
+            </span><!--
+        /--><svg class='icon'><use xlink:href="#caret-r" /></svg>
+        </a>
+    </li>
+    {% endif %}
+</ul>

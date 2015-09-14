@@ -102,3 +102,18 @@
     opacity: .5;
 }
 
+@include small {
+    .u-hide-small {
+        display: none;
+    }
+}
+
+@include medium {
+    .u-hide-medium {
+        display: none;
+    }
+}
+
+.u-text-right {
+    text-align: right;
+}

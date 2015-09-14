@@ -1,0 +1,11 @@
+<ul class='nav'>
+    {% for page in ancestors %}
+        {% if forloop.counter > 1 %}
+            <li>
+                <a href="{{ page.url }}" title="">
+                    {{ page.seo_title }}
+                </a>
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>

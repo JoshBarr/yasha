@@ -3,19 +3,59 @@
 {% load wagtailimages_tags %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+{% block menu_class %}panel-white site-nav-dark{% endblock %}
 
 {% block content %}
 
     <div class="banner">
-        <div class="banner__content gutters">
+
+        {#<div class='site-nav-dark'>#}
+        {#{% navigation_menu 'top' self %}#}
+        {#</div>#}
+
+        <div class="banner__content gutters ">
+
+            {% include "core/includes/crumb.html" %}
+
             <h1>{{ self.title }}</h1>
-            <h4>{{ self.intro }}</h4>
+            {{ self.intro|richtext }}
         </div>
     </div>
 
     <div class="content">
-        <div class="gutters section u-center">
+        <div class="gutters section">
+            <div class="prose">
+                {% if pages|length > 0 %}
+                    {% for page in pages %}
+                        <a class='blog-post' href="{{ page.url }}" title="">
+                            <ul class='nav'>
+                                <li  class='small'>
+                                    {% include "core/includes/avatar.html" with user=page.owner %}
+                                </li>
+                                <li  class='small'>
+                                    {{ page.date }}
+                                </li>
+                            </ul>
+                            <div class="blog-post__image u-space">
+                                {%  image page.feed_image width-400 %}
+                            </div>
+                            <h2>{{ page.title }}</h2>
+                            <p>
+                                {{ page.intro|richtext }}
+                            </p>
+                        </a>
+                    {% endfor %}
 
+                    {% if pages|length > 2 %}
+                    {% include "core/includes/pagination.html" %}
+                    {% endif %}
+
+                {% else %}
+                    <p>
+                        There aren't any blog posts right now
+                    </p>
+                {% endif %}
+            </div>
         </div>
     </div>
 {% endblock %}

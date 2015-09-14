@@ -118,3 +118,9 @@ $grid-row-spacing: 1.5rem;
         }
     }
 }
+
+.nav--wide {
+    > li {
+        margin-right: 2em;
+    }
+}

@@ -16,8 +16,8 @@
 
         {% navigation_menu 'top' self %}
 
-        <div class="banner__content gutters">
-            <h1>{{ self.title }}</h1>
+        <div class="banner__content gutters section">
+            <h1>{{ self.headline }}</h1>
             <h4>{{ self.intro }}</h4>
             <a class='btn btn-primary' href="/about/">
                 {{ self.intro_button_label }}
@@ -35,10 +35,12 @@
             <cite>{{ self.citation }}</cite>
         </div>
         <div class="grid-float panel-highlight gutters">
-            <div class="one-half section">
-                {% image self.issue_image width-400 %}
+            <div class="medium-two-fifths large-one-half section-top">
+                <div class="img-responsive">
+                    {% image self.issue_image width-400 %}
+                </div>
             </div>
-            <div class="one-half section">
+            <div class="medium-three-fifths large-one-half section">
                 <h3>{{ self.issue_headline }}</h3>
                 <p>{{ self.issue_body }}</p>
                 <div class="grid-float ">
@@ -58,6 +60,21 @@
         </div>
         <div class='section panel'>
             <h3 class='u-center'>What we do</h3>
+
+            <div class="longer u-auto u-center">
+                <blockquote class="quote-medium quote quote-light">
+                    {{ self.what_we_do_quote|richtext }}
+                </blockquote>
+                <p>
+                    <a href="/about/what-we-do/" class='btn btn-outline' title="">
+                        More about what we do
+                        <svg>
+                            <use xlink:href="#caret-r">
+                        </svg>
+                    </a>
+                </p>
+            </div>
+
             <div class="grid-float">
                 <div class='medium-one-third'>
 

@@ -109,6 +109,14 @@ select {
     @extend %body-type-size;
 }
 
+.prose {
+    max-width: 40em;
+}
+
+.longer {
+    max-width: 50em;
+}
+
 // small,
 .small {
     font-size: 14px;

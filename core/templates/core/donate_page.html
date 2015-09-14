@@ -3,19 +3,47 @@
 {% load wagtailimages_tags %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+{% block menu %}{% endblock %}
+
 
 {% block content %}
 
-    <div class="banner">
-        <div class="banner__content gutters">
+    <div class="banner banner-medium banner--inverse">
+        <div class="banner__background">
+            {% image self.banner_image width-1200 %}
+        </div>
+
+        {% navigation_menu 'top' self %}
+
+        <div class="banner__content gutters section">
+            {% include "core/includes/crumb.html" %}
+
             <h1>{{ self.title }}</h1>
             <h4>{{ self.intro }}</h4>
-        </div>
-    </div>
-
-    <div class="content">
-        <div class="gutters section u-center">
 
         </div>
     </div>
+    <div class="gutters section">
+        <div class="prose">
+
+         <p>
+                Yasha Ministries is excited to be partnering with GVN Foundation in the United States and GVN Charitable Trust in New Zealand. To contribute from the U.S. or New Zealand, please forward your donation to the appropriate account below with the reference, “Yasha.”
+            </p>
+            <p>
+                <strong>USA</strong> 0000-0000000-00000-00
+            </p>
+            <p>
+                <strong>NZ</strong> 0000-0000000-00000-00
+            </p>
+            <p>
+                <small>
+                    Donations received through GVN are tax deductible should you wish to receive a donation certificate for this purpose.
+                </small>
+            </p>
+            <p>
+                To contribute from other parts of the world please <a href="/contact/">contact us</a> by email.
+            </p>
+        </div>
+    </div>
+
 {% endblock %}

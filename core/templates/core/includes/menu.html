@@ -1,7 +1,7 @@
 {% load wagtailcore_tags %}
 
 <div class="site-nav grid-float gutters u-relative">
-    <div class="two-fifths">
+    <div class="one-third">
         <a href="/" class='logo'>
             <svg>
                 <use xlink:href='#logo' />
@@ -11,19 +11,16 @@
             </span>
         </a>
     </div>
-    <div class="three-fifths">
-        {% for link in links %}
-            <a title="{% if link.title %}{{ link.title }}{% endif %}" href='{{ link.url }}' class='{% if link.css_class %}{{ link.css_class }}{% else %}{% endif %}' data-prepend="{% if link.title %}{{ link.title }}{% endif %}" data-prepend-small="{{ link.short_name }}">
-
-                {% if link.icon_class %}
-                   <i class="i i-{{link.icon_class}}"></i>&nbsp;
-                {% endif %}
-
-                {% if link.title %}
-                    {{ link.title }}
-                {% endif %}
+    <div class="two-thirds clearfix">
+        <div class='u-hide-medium u-text-right site-nav__items '>
+            <a href="#menu" class='btn btn-donate u-hide-medium' title="">
+                Menu
             </a>
-        {% endfor %}
+        </div>
+
+        <ul class='u-right u-hide-small nav nav--wide site-nav__items'>
+        {% include "core/includes/menu_items.html" %}
+        </ul>
     </div>
 </div>
 

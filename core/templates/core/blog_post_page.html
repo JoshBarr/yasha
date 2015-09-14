@@ -6,18 +6,29 @@
 {% block menu_class %}panel-white site-nav-dark{% endblock %}
 
 {% block content %}
+
     <div class="banner">
-        <div class="banner__content gutters">
+        <div class="banner__content gutters ">
             {% include "core/includes/crumb.html" %}
 
+            <ul class='nav'>
+                <li  class='small'>
+                    {% include "core/includes/avatar.html" with user=self.owner %}
+                </li>
+                <li  class='small'>
+                    {{ self.date }}
+                </li>
+            </ul>
             <h1>{{ self.title }}</h1>
-            {{ self.intro|richtext }}
+            <div class='intro'>
+                {{ self.intro|richtext }}
+            </div>
         </div>
     </div>
 
     <div class="content">
         <div class="gutters section">
-            {{ self.body|richtext }}
+        {{ self.body|richtext }}
         </div>
     </div>
 {% endblock %}

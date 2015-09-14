@@ -1,0 +1,12 @@
+{% load static %}
+<span class="avatar">
+    {% if user.username == 'bex' %}
+        <img src="{% static 'images/avatars/bex.jpg' %}" alt="">
+    {% else %}
+        <img src="{% static 'images/avatars/jonny.jpg' %}" alt="">
+    {% endif %}
+</span>
+<span class="avatar__name">
+    {{ user.first_name }}
+    {{ user.last_name }}
+</span>

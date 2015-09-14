@@ -9,7 +9,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page, Orderable
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel, FieldRowPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 from wagtail.wagtailsearch import index
@@ -23,6 +23,30 @@ from core.utilities import *
 from core.snippets import *
 
 options.DEFAULT_NAMES = options.DEFAULT_NAMES + ('description',)
+
+
+
+
+def get_paginator_context(paginator, paginator_index, adjacent_pages):
+    last_page = paginator.num_pages
+    start_page = paginator_index - adjacent_pages
+    end_page = paginator_index + adjacent_pages + 1
+
+    if start_page <= (adjacent_pages + 1):
+        start_page = 1
+
+    if end_page >= last_page - 1:
+        end_page = last_page + 1
+
+    page_numbers = [n for n in range(start_page, end_page + 1) if n > 0 and n <= last_page]
+
+    paginator_objects = []
+    for page_number in page_numbers:
+        paginator_objects.append({
+            'number': page_number,
+            'active': (page_number == paginator_index)
+        })
+    return paginator_objects
 
 
 class RelatedLink(LinkFields):
@@ -79,7 +103,7 @@ class HomePage(Page):
         description = "The top level homepage for your site"
         verbose_name = "Homepage"
 
-    # body = RichTextField(default='')
+    headline = models.CharField(max_length=255, default='', help_text="Displayed in the banner")
     intro = models.CharField(max_length=255, default='', help_text="Displayed below the headline")
     intro_button_label = models.CharField(max_length=128, default='', help_text="Displayed in the banner area")
     banner_image = models.ForeignKey(
@@ -104,27 +128,14 @@ class HomePage(Page):
     stats_1_text = models.CharField(max_length=255, default='', help_text="Statistic description")
     stats_2_number = models.CharField(max_length=20, default='', help_text="Statistic 2 (optional)")
     stats_2_text = models.CharField(max_length=255, default='', help_text="Statistic description 2 (optional)")
+    what_we_do_quote = RichTextField(blank=True)
+
     # date = models.DateField("Post date", default=date.today)
     search_fields = ()
 
     def get_context(self, request):
         # Get pages
         pages = self.get_children().live()
-
-        # Filter by tag
-        tag = request.GET.get('tag')
-        if tag:
-            pages = pages.filter(tags__name=tag)
-
-        # Pagination
-        page = request.GET.get('page')
-        paginator = Paginator(pages, 10)  # Show 10 pages per page
-        try:
-            pages = paginator.page(page)
-        except PageNotAnInteger:
-            pages = paginator.page(1)
-        except EmptyPage:
-            pages = paginator.page(paginator.num_pages)
 
         # Update template context
         context = super(HomePage, self).get_context(request)
@@ -134,6 +145,7 @@ class HomePage(Page):
 
 HomePage.content_panels = [
     FieldPanel('title', classname="full title"),
+    FieldPanel('headline', classname="full title"),
     ImageChooserPanel('banner_image'),
     FieldPanel('intro', classname='full'),
     FieldPanel('intro_button_label', classname='full'),
@@ -146,6 +158,7 @@ HomePage.content_panels = [
     FieldPanel('stats_1_text', classname='full'),
     FieldPanel('stats_2_number', classname='full'),
     FieldPanel('stats_2_text', classname='full'),
+    FieldPanel('what_we_do_quote', classname='full'),
 ]
 
 HomePage.promote_panels = [
@@ -172,13 +185,14 @@ class YashaPage(Page):
     """
     Our main custom Page class. All content pages should inherit from this one.
     """
+    headline = models.CharField(max_length=255, default='', help_text="The page headline, it can be used like a longer title (optional)", blank=True)
     body = RichTextField(blank=True)
     intro = RichTextField(blank=True)
     date = models.DateField("Post date", default=date.today)
     comments = models.BooleanField(
         "Comments ON/OFF",
         default=False,
-        help_text='''Comments are enabled by default. Uncheck the box if you would like to disable them for this\
+        help_text='''Comments are off by default. Check the box if you would like to enable them for this\
          page.'''
     )
     banner_image = models.ForeignKey(
@@ -201,6 +215,12 @@ class YashaPage(Page):
         index.SearchField('body_text', boost=1),
         # index.FilterField('date'),
     )
+
+    def get_context(self, request):
+        context = super(YashaPage, self).get_context(request)
+        context['ancestors'] = self.get_ancestors()
+        context['children'] = YashaPage.objects.live().descendant_of(self).order_by('date')
+        return context
 
     @property
     def child(self):
@@ -259,11 +279,12 @@ class YashaPage(Page):
         return image
 
     class Meta:
-        description = "Standard page for your Springload site"
-        verbose_name = "Springload standard page"
+        description = "Standard page for your site"
+        verbose_name = "Yasha standard page"
 
 YashaPage.content_panels = [
     FieldPanel('title', classname="full title"),
+    FieldPanel('headline', classname="full title"),
     FieldPanel('intro', classname="full"),
     FieldPanel('date'),
     FieldPanel('body', classname="full"),
@@ -297,9 +318,13 @@ class DonatePage(YashaPage):
         verbose_name = "Donations Page"
 
 class ContactPage(YashaPage):
+
     class Meta:
         description = "Contact information for Yasha"
         verbose_name = "Contact Page"
+
+
+# from django.contrib.auth import get_user_model
 
 
 class BlogIndexPage(YashaPage):
@@ -307,8 +332,50 @@ class BlogIndexPage(YashaPage):
         'core.BlogPostPage'
     ]
 
+    def get_context(self, request):
+        # Get pages
+        pages  = BlogPostPage.objects.live().descendant_of(self).order_by('-date')
+
+        # Pagination
+        page = request.GET.get('page')
+        paginator = Paginator(pages, 10)  # Show 10 pages per page
+
+        paginator_index = 1
+
+        if page:
+            paginator_index = int(page)
+
+        try:
+            pages = paginator.page(paginator_index)
+        except PageNotAnInteger:
+            paginator_index = 1
+            pages = paginator.page(paginator_index)
+        except EmptyPage:
+            paginator_index = paginator.num_pages
+            pages = paginator.page(paginator_index)
+
+        # Update template context
+        context = super(BlogIndexPage, self).get_context(request)
+        context['pages'] = pages
+        context['pagination'] = get_paginator_context(paginator, paginator_index, 2)
+
+        return context
+
+
 
 class BlogPostPage(YashaPage):
     subpage_types = []
-    pass
 
+    class Meta:
+        description = "A Yasha blog post"
+        verbose_name = "Blog Post"
+
+BlogPostPage.settings_panels = [
+    MultiFieldPanel([
+        FieldRowPanel([
+            FieldPanel('go_live_at'),
+            FieldPanel('expire_at'),
+        ], classname="label-above"),
+    ], 'Scheduled publishing', classname="publishing"),
+    # FieldPanel('owner'),
+]

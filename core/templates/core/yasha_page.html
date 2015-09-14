@@ -3,19 +3,26 @@
 {% load wagtailimages_tags %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+{% block menu_class %}site-nav-dark panel-white{% endblock %}
 
 {% block content %}
 
+
     <div class="banner">
         <div class="banner__content gutters">
-            <h1>{{ self.title }}</h1>
-            <h4>{{ self.intro }}</h4>
+            {% include "core/includes/crumb.html" %}
+
+            <h1>
+                {{ self.title }}
+            </h1>
+            {{ self.intro|richtext }}
         </div>
     </div>
-
     <div class="content">
-        <div class="gutters section u-center">
-
+        <div class="gutters section">
+            <div class="prose">
+                {{ self.body|richtext}}
+            </div>
         </div>
     </div>
 {% endblock %}
