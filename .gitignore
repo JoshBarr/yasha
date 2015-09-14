@@ -98,5 +98,7 @@ target/
 
 core/static/css/
 core/static/js/
+core/templates/svg/
+
 
 

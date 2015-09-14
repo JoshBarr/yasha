@@ -1,14 +1,29 @@
 {% load wagtailcore_tags %}
 
-{% for link in links %}
-        <a title="{% if link.title %}{{ link.title }}{% endif %}" href='{{ link.url }}' class='{% if link.css_class %}{{ link.css_class }}{% else %}{% endif %}' data-prepend="{% if link.title %}{{ link.title }}{% endif %}" data-prepend-small="{{ link.short_name }}">
-              
-            {% if link.icon_class %}
-               <i class="i i-{{link.icon_class}}"></i>&nbsp;
-            {% endif %}
-
-            {% if link.title %}
-                {{ link.title }}
-            {% endif %}
+<div class="site-nav grid-float gutters u-relative">
+    <div class="two-fifths">
+        <a href="/" class='logo'>
+            <svg>
+                <use xlink:href='#logo' />
+            </svg>
+            <span class='u-accessible'>
+                Yasha
+            </span>
         </a>
-{% endfor %}
+    </div>
+    <div class="three-fifths">
+        {% for link in links %}
+            <a title="{% if link.title %}{{ link.title }}{% endif %}" href='{{ link.url }}' class='{% if link.css_class %}{{ link.css_class }}{% else %}{% endif %}' data-prepend="{% if link.title %}{{ link.title }}{% endif %}" data-prepend-small="{{ link.short_name }}">
+
+                {% if link.icon_class %}
+                   <i class="i i-{{link.icon_class}}"></i>&nbsp;
+                {% endif %}
+
+                {% if link.title %}
+                    {{ link.title }}
+                {% endif %}
+            </a>
+        {% endfor %}
+    </div>
+</div>
+

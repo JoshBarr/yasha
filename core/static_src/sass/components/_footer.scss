@@ -1,0 +1,14 @@
+.footer {
+    border-top: solid 4px #d8d8d2;
+}
+
+$footer-link-color: #806e46;
+
+.footer-link {
+    color: $footer-link-color;
+    text-decoration: underline;
+
+    &:hover {
+        color: darken($footer-link-color, 10%);
+    }
+}

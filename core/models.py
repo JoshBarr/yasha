@@ -1,5 +1,7 @@
 from datetime import timedelta, date
 
+import re
+
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
 import django.db.models.options as options
@@ -66,15 +68,43 @@ class HomePage(Page):
     """
     HomePage class, inheriting from wagtailcore.Page straight away
     """
-    subpage_types = ['core.YashaPage']
+    subpage_types = [
+        'core.AboutPage',
+        'core.BlogIndexPage',
+        'core.DonatePage',
+        'core.ContactPage'
+    ]
 
     class Meta:
         description = "The top level homepage for your site"
         verbose_name = "Homepage"
 
     # body = RichTextField(default='')
-    body = models.CharField(max_length=255, help_text="Test text")
-    date = models.DateField("Post date", default=date.today)
+    intro = models.CharField(max_length=255, default='', help_text="Displayed below the headline")
+    intro_button_label = models.CharField(max_length=128, default='', help_text="Displayed in the banner area")
+    banner_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    quote = models.CharField(max_length=255, default='', help_text="The big homepage quote")
+    citation = models.CharField(max_length=255, default='', help_text="Who authored the quote")
+    issue_headline = models.CharField(max_length=255, default='', help_text="Headline for the issue block")
+    issue_body = models.CharField(max_length=255, default='', help_text="Body text for the issue block")
+    issue_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    stats_1_number = models.CharField(max_length=20, default='', help_text="Statistic")
+    stats_1_text = models.CharField(max_length=255, default='', help_text="Statistic description")
+    stats_2_number = models.CharField(max_length=20, default='', help_text="Statistic 2 (optional)")
+    stats_2_text = models.CharField(max_length=255, default='', help_text="Statistic description 2 (optional)")
+    # date = models.DateField("Post date", default=date.today)
     search_fields = ()
 
     def get_context(self, request):
@@ -104,8 +134,18 @@ class HomePage(Page):
 
 HomePage.content_panels = [
     FieldPanel('title', classname="full title"),
-    FieldPanel('body', classname="full"),
-    FieldPanel('date'),
+    ImageChooserPanel('banner_image'),
+    FieldPanel('intro', classname='full'),
+    FieldPanel('intro_button_label', classname='full'),
+    FieldPanel('quote', classname='full'),
+    FieldPanel('citation', classname='full'),
+    FieldPanel('issue_headline', classname='full'),
+    FieldPanel('issue_body', classname='full'),
+    ImageChooserPanel('issue_image'),
+    FieldPanel('stats_1_number', classname='full'),
+    FieldPanel('stats_1_text', classname='full'),
+    FieldPanel('stats_2_number', classname='full'),
+    FieldPanel('stats_2_text', classname='full'),
 ]
 
 HomePage.promote_panels = [
@@ -137,9 +177,16 @@ class YashaPage(Page):
     date = models.DateField("Post date", default=date.today)
     comments = models.BooleanField(
         "Comments ON/OFF",
-        default=True,
+        default=False,
         help_text='''Comments are enabled by default. Uncheck the box if you would like to disable them for this\
          page.'''
+    )
+    banner_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
     )
     feed_image = models.ForeignKey(
         'wagtailimages.Image',
@@ -152,7 +199,7 @@ class YashaPage(Page):
     search_fields = (
         index.SearchField('intro_text', boost=1),
         index.SearchField('body_text', boost=1),
-        index.FilterField('date'),
+        # index.FilterField('date'),
     )
 
     @property
@@ -220,10 +267,11 @@ YashaPage.content_panels = [
     FieldPanel('intro', classname="full"),
     FieldPanel('date'),
     FieldPanel('body', classname="full"),
+    ImageChooserPanel('banner_image'),
     InlinePanel(YashaPage,
                 'carousel_items',
                 label="Carousel items",
-                help_text="Add the carousel items appearing on the article header."),
+                help_text="Add the carousel items that appear in the page."),
     FieldPanel('tags'),
 ]
 
@@ -232,3 +280,35 @@ YashaPage.promote_panels = [
     MultiFieldPanel(Page.promote_panels, "SEO and metadata fields"),
     ImageChooserPanel('feed_image'),
 ]
+
+
+class AboutPage(YashaPage):
+    subpage_types = [
+        'core.YashaPage'
+    ]
+
+    class Meta:
+        description = "About Yasha"
+        verbose_name = "About Page"
+
+class DonatePage(YashaPage):
+    class Meta:
+        description = "The main donations page"
+        verbose_name = "Donations Page"
+
+class ContactPage(YashaPage):
+    class Meta:
+        description = "Contact information for Yasha"
+        verbose_name = "Contact Page"
+
+
+class BlogIndexPage(YashaPage):
+    subpage_types = [
+        'core.BlogPostPage'
+    ]
+
+
+class BlogPostPage(YashaPage):
+    subpage_types = []
+    pass
+

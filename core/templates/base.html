@@ -1,7 +1,5 @@
 {% load compress static wagtailuserbar wagtailcore_tags wagtailimages_tags core_tags %}
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
@@ -53,10 +51,17 @@
             <!-- End Google Tag Manager -->
         {% endif %}
 
+        <div class='u-hide'>
+            {% include_optional "svg/svg.html" %}
+        </div>
+
         {% wagtailuserbar %}
 
+        {% block menu %}
+        {% navigation_menu 'top' self %}
+        {% endblock %}
 
-        <div class="wrapper section">
+        <div class="wrapper">
         {% block content %}{% endblock %}
         </div>
 
@@ -73,6 +78,5 @@
 
         <script src="//use.typekit.net/mij2rid.js"></script>
         <script>try{Typekit.load({ async: true });}catch(e){}</script>
-
     </body>
 </html>

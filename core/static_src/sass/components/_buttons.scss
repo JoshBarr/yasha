@@ -27,7 +27,7 @@ $padding: 1em;
     border-width: 1px;
     cursor: pointer;                                /* [5] */
     font-family: inherit;                           /* [4] */
-    line-height: 2.5;                               /* [7] */
+    line-height: 2.25;                               /* [7] */
     margin: inherit 0 0 0;                          /* [6] */
     padding-bottom: 0;                              /* [6] */
     padding-left: $padding;                         /* [7] */
@@ -51,6 +51,14 @@ $padding: 1em;
     @extend %btn;
 }
 
+.btn-primary {
+    background: $color-brand;
+    color: #fff;
+
+    &:hover {
+        background-color: darken($color-brand, 5%);
+    }
+}
 
 // Double the padding for a wider button. Useful when the primary CTA is
 // a short word, but everyone wants the button to be visually prominent.
@@ -60,11 +68,19 @@ $padding: 1em;
 }
 
 
+.btn-small {
+    font-size: 14px;
+    line-height: 2.25;
+}
+
 .btn--block {
     width: 100%;
 }
 
 
-
+.btn:active {
+    background-color: #333;
+    color: #fff;
+}
 
 

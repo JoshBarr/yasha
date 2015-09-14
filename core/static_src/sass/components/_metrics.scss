@@ -1,0 +1,11 @@
+.metric {
+    @extend %sans-serif;
+    margin-bottom: .5rem;
+    font-weight: 300;
+    font-size: 32px;
+}
+
+.metric__caption {
+    font-size: 14px;
+}
+

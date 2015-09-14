@@ -95,4 +95,26 @@ $grid-row-spacing: 1.5rem;
 .gutters {
     padding-left: 5%;
     padding-right: 5%;
+
+    @include large {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+}
+
+
+.nav {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+    margin-right: 0;
+
+    > li {
+        display: inline-block;
+        margin-right: 1em;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
 }

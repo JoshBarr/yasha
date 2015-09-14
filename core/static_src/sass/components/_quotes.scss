@@ -1,0 +1,38 @@
+blockquote {
+
+}
+
+%font-large {
+    font-size: 30px;
+    line-height: 1.4;
+
+    @include large {
+        font-size: 32px;
+    }
+}
+
+.quote {
+    @extend %serif;
+    font-style: italic;
+}
+
+.quote-large {
+    > p {
+        @extend %font-large;
+    }
+}
+
+.quote-light {
+    @extend %font-smoothing;
+    color: #615f5b;
+    font-weight: 100;
+}
+
+.quote + cite {
+    opacity: .7;
+    &:before {
+        display: inline-block;
+        content: "–";
+        margin-right: .25em;
+    }
+}

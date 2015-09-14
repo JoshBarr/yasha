@@ -24,8 +24,8 @@ input[type="tel"],
 input[type="url"],
 textarea {
 
-    display: block;
-    width: 100%;
+    // display: block;
+    // width: 100%;
     padding: 0.75rem 0.5rem;
     font-size: 1rem;
     line-height: normal;
@@ -48,4 +48,22 @@ textarea {
         border-color: $color-field-error;
     }
 
+}
+
+
+.input-inline.input-inline {
+    display: inline-block;
+    width: auto;
+    padding: .55em .75em .55em;
+    font-size: 14px;
+    background: #fff;
+    border: none;
+    border-top-left-radius: .35em;
+    border-bottom-left-radius: .35em;
+}
+
+.input-inline__button {
+    margin-left: -.5em;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }

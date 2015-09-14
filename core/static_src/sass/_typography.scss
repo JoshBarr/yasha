@@ -94,6 +94,7 @@ ol,
 dl,
 address {
     margin-top: 0;
+    margin-bottom: 1.5rem;
 }
 
 p,
@@ -106,4 +107,12 @@ textarea,
 button,
 select {
     @extend %body-type-size;
+}
+
+// small,
+.small {
+    font-size: 14px;
+    // li, p {
+    //     font-size: 13px;
+    // }
 }

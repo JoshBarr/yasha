@@ -1,0 +1,39 @@
+.banner {
+    position: relative;
+    overflow: hidden;
+
+}
+
+.banner-large {
+     @include large {
+        min-height: 100vh;
+    }
+}
+
+    .banner--inverse {
+        @extend %font-smoothing;
+        color: #fff;
+    }
+
+.banner__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    > img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.banner__content {
+    position: relative;
+    top: 0;
+    left: 0;
+
+    @include large {
+        max-width: 50%;
+    }
+}
+

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags core_tags %}
+{% load wagtailimages_tags %}
+
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
+{% block content %}
+
+    <div class="banner">
+        <div class="banner__content gutters">
+            <h1>{{ self.title }}</h1>
+            <h4>{{ self.intro }}</h4>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="gutters section u-center">
+
+        </div>
+    </div>
+{% endblock %}

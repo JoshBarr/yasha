@@ -6,15 +6,17 @@ var path = require( 'path');
 var rename = require('gulp-rename');
 var inject = require('gulp-inject');
 
+var destDir = './core/templates/svg/';
 
 gulp.task('svg', function () {
 
     return gulp
         .src (path.join( config.paths.svg, "**", "*.svg" ) )
-        .pipe(rename({prefix: 'i-'}))
+        // .pipe(rename({ prefix: 'i-' }))
         .pipe(svgmin())
-        .pipe(svgstore())
-        .pipe(gulp.dest( config.paths.images ));
+        .pipe(svgstore({ inlineSvg: true }))
+        .pipe(rename('svg.html'))
+        .pipe(gulp.dest( destDir ));
 
 });
 

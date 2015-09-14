@@ -15,14 +15,13 @@
     "js": "gulp js",
     "svg": "gulp svg",
     "watch": "gulp watch",
-    "docs": "mkdir -p ./static && npm run build && NODE_ENV=development node --harmony ./docs/index.js",
     "start": "NODE_ENV=development gulp build && NODE_ENV=development gulp watch",
     "production": "NODE_ENV=production gulp build",
     "deploy": "git push && git push -f origin master:deploy/production"
   },
   "devDependencies": {
     "babelify": "^6.0.2",
-    "browser-sync": "^2.8.0",
+    "browser-sync": "^2.9.3",
     "browserify": "^11.0.1",
     "browserify-incremental": "^3.0.0",
     "express": "^4.13.0",
