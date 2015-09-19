@@ -88,6 +88,69 @@ class CarouselItem(models.Model):
         abstract = True
 
 
+
+class PageSection(models.Model):
+    """
+    The sections on the homepage
+    """
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    title = models.CharField(max_length=255, blank=True)
+    body = RichTextField(max_length=700, blank=True)
+    page_link = models.ForeignKey(
+        'wagtailcore.Page',
+        null=True,
+        blank=True,
+        related_name='+'
+    )
+
+    panels = [
+        FieldPanel('title'),
+        FieldPanel('body'),
+        PageChooserPanel('page_link'),
+        ImageChooserPanel('image'),
+    ]
+
+    class Meta:
+        abstract = True
+
+
+
+class HomeStatistic(models.Model):
+    """
+    A client testimonial
+    """
+    statistic = models.CharField(max_length=255, blank=True)
+    caption = models.CharField(max_length=255, blank=True)
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    panels = [
+        FieldPanel('statistic'),
+        FieldPanel('caption'),
+        FieldPanel('image'),
+    ]
+
+    class Meta:
+        abstract = True
+
+
+class HomeStatistic(Orderable, HomeStatistic):
+    page = ParentalKey('core.HomePage', related_name='statistics')
+
+class HomeSection(Orderable, PageSection):
+    page = ParentalKey('core.HomePage', related_name='sections')
+
 class HomePage(Page):
     """
     HomePage class, inheriting from wagtailcore.Page straight away
@@ -115,20 +178,17 @@ class HomePage(Page):
     )
     quote = models.CharField(max_length=255, default='', help_text="The big homepage quote")
     citation = models.CharField(max_length=255, default='', help_text="Who authored the quote")
-    issue_headline = models.CharField(max_length=255, default='', help_text="Headline for the issue block")
-    issue_body = models.CharField(max_length=255, default='', help_text="Body text for the issue block")
-    issue_image = models.ForeignKey(
+    statistics_headline = models.CharField(max_length=255, default='', help_text="Headline for the issue block")
+    statistics_body = models.CharField(max_length=255, default='', help_text="Body text for the issue block")
+    quote_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+'
     )
-    stats_1_number = models.CharField(max_length=20, default='', help_text="Statistic")
-    stats_1_text = models.CharField(max_length=255, default='', help_text="Statistic description")
-    stats_2_number = models.CharField(max_length=20, default='', help_text="Statistic 2 (optional)")
-    stats_2_text = models.CharField(max_length=255, default='', help_text="Statistic description 2 (optional)")
-    what_we_do_quote = RichTextField(blank=True)
+
+    what_we_do_headline = models.CharField(max_length=255, default='', help_text="Top of the what we do section")
 
     # date = models.DateField("Post date", default=date.today)
     search_fields = ()
@@ -142,23 +202,20 @@ class HomePage(Page):
         context['pages'] = pages
         return context
 
-
 HomePage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('headline', classname="full title"),
     ImageChooserPanel('banner_image'),
     FieldPanel('intro', classname='full'),
     FieldPanel('intro_button_label', classname='full'),
+    FieldPanel('statistics_headline', classname='full'),
+    FieldPanel('statistics_body', classname='full'),
+    InlinePanel('statistics', label='Statistics blocks'),
+    ImageChooserPanel('quote_image'),
     FieldPanel('quote', classname='full'),
     FieldPanel('citation', classname='full'),
-    FieldPanel('issue_headline', classname='full'),
-    FieldPanel('issue_body', classname='full'),
-    ImageChooserPanel('issue_image'),
-    FieldPanel('stats_1_number', classname='full'),
-    FieldPanel('stats_1_text', classname='full'),
-    FieldPanel('stats_2_number', classname='full'),
-    FieldPanel('stats_2_text', classname='full'),
-    FieldPanel('what_we_do_quote', classname='full'),
+    FieldPanel('what_we_do_headline'),
+    InlinePanel('sections', label='What we do sections'),
 ]
 
 HomePage.promote_panels = [

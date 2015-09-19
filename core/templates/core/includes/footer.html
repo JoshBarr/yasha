@@ -1,22 +1,25 @@
 <div class="footer section">
     <div class="gutters">
-        <h4>Yasha</h4>
+        <h4>{{ footer.title|default:'Yasha' }}</h4>
         <ul class='nav'>
             <li class='small'>
-                Yasha Ministries, P O Box 943, White River, South Africa, 1240
+                {{ footer.address|default:'Address details go here' }}
             </li>
             <li class='small'>
-                <a href="tel:+27 83 791 9044" title="" class="footer-link">+27 83 791 9044</a>
+                <a href="tel:{{ footer.phone_number }}" title="" class="footer-link">
+                    {{ footer.phone_number|default:'+00 000 00000' }}
+                </a>
             </li>
             <li class='small'>
-                <a href="/contact/" title="" class="footer-link">Full contact info</a>
+                <a href="{{ footer.contact_link.url|default:'/contact/' }} " title="" class="footer-link">  Full contact info
+                </a>
             </li>
         </ul>
         <hr>
 
-        <h4>Get involved</h4>
+        <h4>{{ footer.signup_title|default:'Get involved'}}</h4>
         <p>
-            We’ll keep you updated with our latest news and ways you can help.
+            {{ footer.signup_text|default:'Get involved'}}
         </p>
 
         <form action="//yasha.us11.list-manage.com/subscribe/post?u=550cd030db4318a3a0f30bde0&amp;id=c4e0e22668" method="post" id="mc-embedded-subscribe-form" method="post" class="form-inline">

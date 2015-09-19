@@ -7,6 +7,8 @@ from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.wagtailcore.models import Orderable
 
 from modelcluster.fields import ParentalKey
+from wagtail.wagtailsearch import index
+
 
 from core.utilities import *
 
@@ -178,3 +180,45 @@ NavigationMenu.panels = [
     FieldPanel('menu_name', classname='full title'),
     InlinePanel(NavigationMenu, 'menu_items', label="Menu Items", help_text='Set the menu items for the current menu.')
 ]
+
+
+
+@register_snippet
+class Footer(models.Model):
+    title = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
+    phone_number = models.CharField(max_length=20)
+    text = models.CharField(max_length=255)
+
+    contact_link = models.ForeignKey(
+        'wagtailcore.Page',
+        null=True,
+        on_delete=models.SET_NULL,
+        blank=True,
+        related_name='+',
+        help_text='Choose a page to point this link to.'
+    )
+
+    signup_title = models.CharField(max_length=255)
+    signup_text = models.CharField(max_length=255)
+
+    panels = [
+        FieldPanel('title'),
+        FieldPanel('address'),
+        FieldPanel('phone_number'),
+        PageChooserPanel('contact_link'),
+        FieldPanel('signup_title'),
+        FieldPanel('signup_text'),
+    ]
+
+    def __str__(self):              # __unicode__ on Python 2
+        return self.text
+
+    search_fields = [
+        index.SearchField('text', partial_match=True),
+        index.SearchField('phone_number', partial_match=True),
+        index.SearchField('email_address', partial_match=True),
+        index.SearchField('signup_title', partial_match=True),
+        index.SearchField('signup_text', partial_match=True),
+    ]
+

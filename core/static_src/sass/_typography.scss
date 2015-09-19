@@ -60,7 +60,7 @@ h1 {
 }
 
 h2 {
-
+    margin-bottom: 2.5rem;
 }
 
 h3 {
@@ -115,6 +115,13 @@ select {
 
 .longer {
     max-width: 50em;
+}
+
+
+.intro,
+.intro p {
+    font-size: 1.125rem;
+
 }
 
 // small,

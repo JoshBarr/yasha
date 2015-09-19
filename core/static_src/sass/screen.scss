@@ -7,11 +7,6 @@
 @import 'components/functions';
 @import 'breakpoints';
 
-
-
-
-
-
 // Base imports
 @import '../../../node_modules/normalize.css/normalize';
 @import 'elements';
@@ -118,6 +113,7 @@
 @import 'components/modals';
 @import 'components/radio-picker';
 @import 'components/scrollable';
+@import 'components/media';
 @import 'components/banner';
 @import 'components/panels';
 @import 'components/footer';
@@ -125,6 +121,20 @@
 @import 'components/metrics';
 
 
+.breadcrumb {
+    > li {
+        margin-right: .4em;
+    }
+}
+
+    .breadcrumb__icon {
+        width: .75em;
+        height: .75em;
+        margin-left: .5em;
+        margin-top: -.2em;
+        color: inherit;
+        opacity: .7;
+    }
 
 
 

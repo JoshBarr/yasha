@@ -8,13 +8,11 @@
 
 {% block content %}
 
-    <div class="banner banner-medium banner--inverse">
+    {% image self.banner_image width-1200 as hero %}
+
+    <div class="banner banner-medium banner--inverse" style="background-image: url({{ hero.url }});">
 
         {% navigation_menu 'top' self %}
-
-        <div class="banner__background">
-            {% image self.banner_image width-1200 %}
-        </div>
 
         <div class="banner__content gutters section">
             {% include "core/includes/crumb.html" %}

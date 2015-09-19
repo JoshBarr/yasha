@@ -34,7 +34,7 @@ $spacing-media: 1em;
 
 // Swap the image to the right
 .media--rev > .media__image {
-    float: right
+    float: right;
     margin-right: 0;
     margin-left: $spacing-media;
 }

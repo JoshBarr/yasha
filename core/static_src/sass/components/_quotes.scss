@@ -35,11 +35,31 @@ blockquote {
     font-weight: 100;
 }
 
-.quote + cite {
+%cite {
     opacity: .7;
     &:before {
         display: inline-block;
         content: "–";
         margin-right: .25em;
+    }
+}
+
+.quote + cite {
+    @extend %cite;
+}
+
+.home-quote {
+    @extend %font-smoothing;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.5;
+
+    &:first-child {
+        margin-top: 7%;
+    }
+
+    + cite {
+        opacity: 1;
+        @extend %cite;
     }
 }

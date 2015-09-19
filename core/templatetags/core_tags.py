@@ -6,7 +6,7 @@ from django.template.loader_tags import do_include
 from django.template.defaulttags import CommentNode
 
 
-from core.snippets import NavigationMenu
+from core.snippets import NavigationMenu, Footer
 from core.utilities import *
 
 register = template.Library()
@@ -127,3 +127,19 @@ def get_param_replace(request, field, value):
     dict_ = request.GET.copy()
     dict_[field] = value
     return dict_.urlencode()
+
+
+@register.inclusion_tag('core/includes/footer.html', takes_context=True)
+def footer(context):
+    footer = False
+
+    try:
+        footer = Footer.objects.all()[:1].get()
+    except:
+        pass
+
+    return {
+        'footer': footer,
+        'request': context['request'],
+    }
+

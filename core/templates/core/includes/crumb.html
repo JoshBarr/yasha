@@ -1,10 +1,15 @@
-<ul class='nav'>
+<ul class='nav breadcrumb'>
     {% for page in ancestors %}
         {% if forloop.counter > 1 %}
             <li>
                 <a href="{{ page.url }}" title="">
                     {{ page.seo_title }}
                 </a>
+                {% if not forloop.last %}
+                    <svg class='breadcrumb__icon icon'>
+                        <use xlink:href="#caret-r">
+                    </svg>
+                {% endif %}
             </li>
         {% endif %}
     {% endfor %}

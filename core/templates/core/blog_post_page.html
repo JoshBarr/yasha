@@ -16,6 +16,9 @@
         <div class="banner__content gutters section">
             {% include "core/includes/crumb.html" %}
 
+
+            <h1>{{ self.title }}</h1>
+
             <ul class='nav'>
                 <li  class='small'>
                     {% include "core/includes/avatar.html" with user=self.owner %}
@@ -24,10 +27,13 @@
                     {{ self.date }}
                 </li>
             </ul>
-            <h1>{{ self.title }}</h1>
+
             <div class='intro'>
                 {{ self.intro|richtext }}
             </div>
+
+
+
         </div>
     </div>
 

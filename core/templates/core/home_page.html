@@ -3,22 +3,24 @@
 {% load wagtailimages_tags %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
-
 {% block menu %}{% endblock %}
 
 {% block content %}
 
-    <div class="banner banner--inverse banner-large">
+    {% image self.banner_image width-1200 as hero %}
+
+    <div class="banner banner--inverse banner-large" style="background-image: url({{ hero.url }});">
 
         {% navigation_menu 'top' self %}
 
-        <div class="banner__background">
-            {% image self.banner_image width-1200 %}
-        </div>
-
         <div class="banner__content gutters section">
-            <h1>{{ self.headline }}</h1>
-            <h4>{{ self.intro }}</h4>
+            <h1>
+                Raising a global village<br>
+                Restoring hope<br>
+                Rebuilding a nation<br>
+                Together we can.
+            </h1>
+            <h4 class='banner__text'>{{ self.intro }}</h4>
             <a class='btn btn-primary' href="/about/">
                 {{ self.intro_button_label }}
             </a>
@@ -27,64 +29,70 @@
 
     <div class="content">
         <div class="gutters section u-center">
-            <blockquote class='quote quote-large quote-light'>
-                <p>
-                    {{ self.quote }}
-                </p>
-            </blockquote>
-            <cite>{{ self.citation }}</cite>
-        </div>
-        <div class="grid-float panel-highlight gutters">
-            <div class="medium-two-fifths large-one-half section-top">
-                <div class="img-responsive">
-                    {% image self.issue_image width-400 %}
-                </div>
-            </div>
-            <div class="medium-three-fifths large-one-half section">
-                <h3>{{ self.issue_headline }}</h3>
-                <p>{{ self.issue_body }}</p>
-                <div class="grid-float ">
-                    <div class="full">
-                        <h3>In our community</h3>
-                    </div>
-                    <div class="one-half">
-                        <h2 class='metric'>{{ self.stats_1_number}}</h2>
-                        <p class='metric__caption'>{{ self.stats_1_text}}</p>
-                    </div>
-                    <div class="one-half">
-                        <h2 class='metric'>{{ self.stats_2_number}}</h2>
-                        <p class='metric__caption'>{{ self.stats_2_text}}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class='section panel'>
-            <h3 class='u-center'>What we do</h3>
+            <h3>{{ self.statistics_headline }}</h3>
+            {% if self.statistics_body %}
+            <p>{{ self.statistics_body }}</p>
+            {% endif %}
 
-            <div class="longer u-auto u-center">
-                <blockquote class="quote-medium quote quote-light">
-                    {{ self.what_we_do_quote|richtext }}
-                </blockquote>
-                <p>
-                    <a href="/about/what-we-do/" class='btn btn-outline' title="">
+            <div class="grid-float section">
+
+            {% for stat in self.statistics.all %}
+                <div class="medium-one-third">
+                    {% image stat.image width-400 %}
+                    <h2 class='metric'>{{ stat.statistic}}</h2>
+                    <p class='metric__caption'>{{ stat.caption}}</p>
+                </div>
+            {% endfor %}
+
+            </div>
+        </div>
+        <div class="grid-float panel-highlight gutters section">
+            <div class="medium-two-fifths large-one-half">
+                <div class="img-responsive">
+                    {% image self.quote_image width-400 %}
+                </div>
+            </div>
+            <div class="medium-three-fifths large-one-half">
+                <h3 class='home-quote'>
+                    <em>
+                        “{{ self.quote }}”
+                    </em>
+                </h3>
+
+                <cite>{{ self.citation }}</cite>
+                </div>
+            </div>
+        </div>
+        <div class='section panel gutters'>
+            <h2 class='u-center u-space-large'>What we do</h2>
+            <div class=" u-auto">
+                <div class="grid-float u-space-large">
+                {% for section in self.sections.all %}
+                    <div class='u-left'>
+                        <div class="grid-float">
+                            <div class="medium-one-third">
+                                <p>
+                                    {% image section.image width-400 %}
+                                </p>
+                            </div>
+                            <div class="medium-two-thirds">
+                                <h3>
+                                    {{ section.title }}
+                                </h3>
+                                {{ section.body|richtext }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+                <p class="u-center">
+                    <a href="/about/what-we-do/" title="" class='btn btn-outline icon-text -tiny'>
                         More about what we do
-                        <svg>
-                            <use xlink:href="#caret-r">
+                        <svg class='i'>
+                            <use xlink:href="#caret-r" />
                         </svg>
                     </a>
                 </p>
-            </div>
-
-            <div class="grid-float">
-                <div class='medium-one-third'>
-
-                </div>
-                <div class='medium-one-third'>
-
-                </div>
-                <div class='medium-one-third'>
-
-                </div>
             </div>
         </div>
     </div>
