@@ -106,8 +106,13 @@
 },
 {
     "fields": {
-        "body": "<p>Welcome home</p>",
-        "date": "2015-04-28"
+        "headline": "Headline",
+        "intro": "Welcome home",
+        "intro_button_label": "",
+        "statistics_headline": "The issues we face",
+        "statistics_body": "Placeholder text",
+        "what_we_do_headline": "What we do",
+        "quote": "A quote"
     },
     "model": "core.homepage",
     "pk": 2
