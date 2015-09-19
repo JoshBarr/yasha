@@ -7,19 +7,21 @@
 
 {% block content %}
 
-    <div class="banner">
+    {% image self.banner_image width-1200 as hero %}
+    <div class="banner banner-medium banner--inverse" style="background-image: url({{ hero.url }});">
 
-        <div class='site-nav-dark'>
         {% navigation_menu 'top' self %}
-        </div>
 
-        <div class="banner__content gutters section">
+        <div class="banner__content gutters section-top">
             {% include "core/includes/crumb.html" %}
-
 
             <h1>{{ self.title }}</h1>
 
-            <ul class='nav'>
+            <div class='intro u-space-xlarge'>
+                {{ self.intro|richtext }}
+            </div>
+
+            <ul class='nav '>
                 <li  class='small'>
                     {% include "core/includes/avatar.html" with user=self.owner %}
                 </li>
@@ -28,17 +30,14 @@
                 </li>
             </ul>
 
-            <div class='intro'>
-                {{ self.intro|richtext }}
-            </div>
-
-
-
         </div>
     </div>
 
     <div class="content">
         <div class="gutters section">
+
+
+
         {{ self.body|richtext }}
         </div>
     </div>

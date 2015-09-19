@@ -6,11 +6,10 @@
 {% block menu %}{% endblock %}
 
 {% block content %}
-    <div class="banner">
+    {% image self.banner_image width-1200 as hero %}
+    <div class="banner banner-medium banner--inverse" style="background-image: url({{ hero.url }});">
 
-        <div class='site-nav-dark'>
         {% navigation_menu 'top' self %}
-        </div>
 
         <div class="banner__content gutters section">
             {% include "core/includes/crumb.html" %}

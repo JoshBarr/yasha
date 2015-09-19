@@ -7,6 +7,10 @@
     max-height: 630px;
 }
 
+.banner-small {
+    min-height: 50vh;
+}
+
 .banner-medium {
     // height: 0;
     // padding-bottom: 35%;
@@ -32,6 +36,7 @@
 }
 
     .banner--inverse {
+        background-color: #48413E;
         @extend %font-smoothing;
         color: #fff;
 
@@ -77,7 +82,7 @@
     // left: 0;
 
     @include medium {
-        margin-top: 2em;
+        // margin-top: 2em;
         background-color: transparent;
         max-width: 55%;
     }
