@@ -4,4 +4,5 @@ redis==2.10.3
 django-redis-cache==0.13.0
 django-celery
 django-jinja
-gunicorn==19.3.0
+gevent>=1.0.2
+gunicorn>=19.3.0
