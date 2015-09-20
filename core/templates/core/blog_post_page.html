@@ -7,8 +7,8 @@
 
 {% block content %}
 
-    {% image self.banner_image width-1300 as hero %}
-    <div class="banner banner-medium banner--inverse" style="background-image: url({{ hero.url }});">
+    {#% image self.banner_image width-1300 as hero %#}
+    <div class="banner banner-small banner--inverse">
 
         {% navigation_menu 'top' self %}
 
@@ -17,26 +17,39 @@
 
             <h1>{{ self.title }}</h1>
 
-            <div class='intro u-space-xlarge'>
+            <div class='intro'>
                 {{ self.intro|richtext }}
             </div>
-
-            <ul class='nav '>
-                <li  class='small'>
-                    {% include "core/includes/avatar.html" with user=self.owner %}
-                </li>
-                <li  class='small'>
-                    {{ self.date }}
-                </li>
-            </ul>
-
         </div>
     </div>
 
     <div class="content">
         <div class="gutters section">
-            <div class="prose">
-                {{ self.body|richtext }}
+            <div class="grid-float -space">
+                <div class="medium-two-thirds">
+                    <div class="prose">
+                        {% image self.banner_image width-640 as hero %}
+                        <div class="blog-post__image u-space">
+                            <img src="{{hero.url}}" alt="">
+                        </div>
+
+                        {% if self.body %}
+                        {{ self.body|richtext }}
+                        {% else %}
+                            This blog post has no content.
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="medium-one-third">
+                    <ul class='nav'>
+                        <li  class='small'>
+                            {% include "core/includes/avatar.html" with user=self.owner %}
+                        </li>
+                        <li  class='small'>
+                            {{ self.date }}
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
