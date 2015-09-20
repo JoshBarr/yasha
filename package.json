@@ -15,6 +15,7 @@
     "js": "gulp js",
     "svg": "gulp svg",
     "watch": "gulp watch",
+    "develop": "gulp start",
     "start": "NODE_ENV=development gulp build && NODE_ENV=development gulp watch",
     "production": "NODE_ENV=production gulp build",
     "deploy": "git push && git push -f origin master:deploy/production"
