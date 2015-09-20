@@ -259,6 +259,7 @@ class YashaPage(Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    large_banner = models.BooleanField(default=False, help_text='Whether or not the banner should be a big one')
     feed_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -346,6 +347,7 @@ YashaPage.content_panels = [
     FieldPanel('date'),
     FieldPanel('body', classname="full"),
     ImageChooserPanel('banner_image'),
+    FieldPanel('large_banner'),
     InlinePanel('carousel_items',
                 label="Carousel items",
                 help_text="Add the carousel items that appear in the page."),

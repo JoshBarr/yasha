@@ -8,7 +8,9 @@
 {% block content %}
 
     {% image self.banner_image width-1300 as hero %}
-    <div class="banner banner--inverse banner-small" style="background-image: url({{ hero.url }});">
+
+
+    <div class="banner banner--inverse {% if self.large_banner %}banner-large{% else %}banner-small{% endif %}" style="background-image: url({{ hero.url }});">
 
         {% navigation_menu 'top' self %}
 
