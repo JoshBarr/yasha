@@ -16,27 +16,24 @@
             {% include "core/includes/crumb.html" %}
 
             <h1>
-                Yasha is a Hebrew word. It means to deliver.
+                {{ self.headline }}
             </h1>
-            <p>
-                To transfer.  To transport. To transfigure. From death to life. From dark to light. From one realm, from one reality, from one experience…. all the way to another.
-            </p>
-            <p>
-                Another entirely <em>other</em>.
-            </p>
+            <div class="intro">
+                {{ self.intro|richtext}}
+            </div>
+
         </div>
     </div>
 
-    <div class="about-block">
+    <div class="content about-block">
         <div class="gutters section">
+
             {% include "core/includes/subnav.html" %}
-            {{ self.body|richtext }}
+
+            <div class="prose">
+                {{ self.body|richtext }}
+            </div>
         </div>
     </div>
 
-    <div class="content">
-        <div class="gutters section u-center">
-
-        </div>
-    </div>
 {% endblock %}

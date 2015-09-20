@@ -17,7 +17,9 @@
             {% include "core/includes/crumb.html" %}
 
             <h1>{{ self.title }}</h1>
-            {{ self.intro|richtext }}
+            <div class="intro">
+                {{ self.intro|richtext }}
+            </div>
         </div>
     </div>
 

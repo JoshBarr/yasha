@@ -35,10 +35,9 @@
 
     <div class="content">
         <div class="gutters section">
-
-
-
-        {{ self.body|richtext }}
+            <div class="prose">
+                {{ self.body|richtext }}
+            </div>
         </div>
     </div>
 {% endblock %}

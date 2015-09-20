@@ -203,7 +203,7 @@ class Footer(models.Model):
     signup_text = models.CharField(max_length=255)
 
     panels = [
-        FieldPanel('title'),
+        FieldPanel('title', classname='full title'),
         FieldPanel('address'),
         FieldPanel('phone_number'),
         PageChooserPanel('contact_link'),
@@ -212,7 +212,11 @@ class Footer(models.Model):
     ]
 
     def __str__(self):              # __unicode__ on Python 2
-        return self.text
+        return self.title
+
+    class Meta:
+        verbose_name = "Footer content"
+        description = "Info that belongs in the site footer."
 
     search_fields = [
         index.SearchField('text', partial_match=True),
