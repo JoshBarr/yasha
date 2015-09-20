@@ -3,6 +3,6 @@ psycopg2>=2.5.5
 django-compressor>=1.5
 django-modelcluster>=0.6
 django-taggit>=0.17.0
-wagtail==1.0
+wagtail==1.1
 beautifulsoup4>=4.4.0
 wagtailgmaps>=0.2.2

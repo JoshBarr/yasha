@@ -107,14 +107,14 @@ MIDDLEWARE_CLASSES = (
 
 # Name and email addresses of recipients
 ADMINS = (
-    ('Tech-urgent', 'tech-urgent@springload.co.nz'),
+    ('Tech-urgent', 'admin@yasha.org.za'),
 )
 
 # Default from address for CMS auto email messages (logs, errors..)
-SERVER_EMAIL = 'errors@springload.co.nz'
+SERVER_EMAIL = 'errors@yasha.org.za'
 
 # Default from address for CMS email messages to users (forgot password etc..)
-DEFAULT_FROM_EMAIL = '%s@springload.co.nz' % SITE_NAME
+DEFAULT_FROM_EMAIL = '%s@yasha.org.za' % SITE_NAME
 
 ROOT_URLCONF = SITE_NAME + '.urls'
 WSGI_APPLICATION = SITE_NAME + '.wsgi.application'
