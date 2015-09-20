@@ -10,6 +10,7 @@ USERNAME=$1
 DOMAIN=$2
 SETTINGS=$3
 
+# Ensure the virtualenv is setup on the server first.
 # Activate virtual environment
 source yashaenv/bin/activate
 # cd /var/www/$USERNAME/$DOMAIN/$USERNAME
