@@ -86,6 +86,16 @@
         left: 0;
         right: 0;
         bottom: 0;
+
+        &:before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            height: 50%;
+            background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, .5));
+        }
     }
 }
 
