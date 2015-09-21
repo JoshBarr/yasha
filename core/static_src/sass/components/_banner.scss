@@ -1,10 +1,18 @@
 .banner {
     position: relative;
     // overflow: hidden;
-    background-color: #ddd;
-    background-size: cover;
-    min-height: 65vh;
-    max-height: 630px;
+    // background-color: #ddd;
+
+    background-position: top right;
+    background-size: 100%;
+    background-repeat: no-repeat;
+
+    @include medium {
+        background-position: top right;
+        background-size: cover;
+        min-height: 65vh;
+        max-height: 630px;
+    }
 }
 
 .banner-small {
@@ -54,23 +62,7 @@
 
     }
 
-.banner__background {
-    // min-height: 50vh;
-    top: 0;
-    left: 0;
-    right: 0;
 
-    // @include medium {
-    //     position: absolute;
-    // }
-
-
-    > img {
-        width: 100%;
-        height: auto;
-        display: block;
-    }
-}
 
 .banner .site-nav {
     // position: absolute;
@@ -84,8 +76,10 @@
     // position: relative;
     // top: 0;
     // left: 0;
+    margin-top: 30%;
 
     @include medium {
+        margin-top: 0;
         // margin-top: 2em;
         background-color: transparent;
         max-width: 55%;
