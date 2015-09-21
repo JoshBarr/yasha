@@ -52,6 +52,7 @@
 }
 
 .banner__content {
+    text-shadow: 0 1px 1px rgba(0,0,0,0.25);
 
     @include medium {
         position: relative;
