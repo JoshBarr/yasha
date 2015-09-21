@@ -124,3 +124,15 @@ $grid-row-spacing: 1.5rem;
         margin-right: 2em;
     }
 }
+
+.nav--stack-small {
+    @include small {
+        > li {
+            display: block;
+            margin-bottom: .5em;
+            border-bottom: solid 1px #eee;
+            margin-right: 0;
+            padding-bottom: .5em;
+        }
+    }
+}

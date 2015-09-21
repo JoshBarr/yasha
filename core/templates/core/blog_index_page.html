@@ -7,10 +7,10 @@
 
 {% block content %}
 
-    {% image self.banner_image width-1300 as hero %}
-    <div class="banner banner-medium banner--inverse" style="background-image: url({{ hero.url }});">
+    <div class="banner banner-medium banner--inverse">
 
         {% navigation_menu 'top' self %}
+        {% include "core/includes/banner_image.html" %}
 
         <div class="banner__content gutters section">
 
