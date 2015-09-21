@@ -89,6 +89,10 @@
         // margin-top: 2em;
         background-color: transparent;
         max-width: 55%;
+
+        &.-wide {
+            max-width: 34em;
+        }
     }
 }
 
