@@ -10,7 +10,7 @@
     <div class="banner banner--inverse {% if self.large_banner %}banner-large{% else %}banner-medium{% endif %}">
 
         {% navigation_menu 'top' self %}
-        {% include "core/includes/banner_image.html" %}
+        {% include "core/includes/banner_image.html" with position='bottom' %}
 
         <div class="banner__content gutters section">
 

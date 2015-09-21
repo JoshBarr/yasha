@@ -1,7 +1,7 @@
 {% load wagtailimages_tags %}
 
  {% image self.banner_image width-1300 as hero %}
-<div class="banner__image-large"  style="background-image: url({{ hero.url }});"></div>
+<div class="banner__image-large {% if position %}banner__image-{{position}}{% endif %}"  style="background-image: url({{ hero.url }});"></div>
 <div class="banner__image-small img-responsive">
     {% if hero %}
     <img class="" src="{{  hero.url  }}" alt="{{ hero.title }}">
