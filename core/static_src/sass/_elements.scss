@@ -41,9 +41,10 @@ h1, h2, h3 {
     font-weight: 400;
 }
 
+$color-link-text: #70A51C;
 
 a {
-    color: #2db89b;
+    color: $color-link-text;
     text-decoration: none;
 }
 
