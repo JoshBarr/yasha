@@ -1,9 +1,13 @@
 'use strict';
 
-import GA from 'springload-analytics.js';
+class Site {
+    constructor() {
 
-const name = 'World';
+    }
+}
 
-console.log(`Hello ${name}!`);
-
-GA.init();
+if ('addEventListener' in window\
+    && 'querySelectorAll' in document\
+    && 'XMLHttpRequest' in window) {
+    var site = new Site();
+}
