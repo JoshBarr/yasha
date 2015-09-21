@@ -15,7 +15,7 @@
         <div class="banner__content gutters section">
             {% include "core/includes/crumb.html" %}
             <h1>
-                {{ self.headline }}
+                {{ self.headline|safe }}
             </h1>
             <div class="intro">
                 {{ self.intro|richtext}}
