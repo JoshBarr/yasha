@@ -1,4 +1,6 @@
-'use strict';
+const cut     = 'addEventListener' in window;
+const the     = 'querySelectorAll' in document;
+const mustard = 'XMLHttpRequest'   in window;
 
 class Site {
     constructor() {
@@ -6,8 +8,7 @@ class Site {
     }
 }
 
-if ('addEventListener' in window\
-    && 'querySelectorAll' in document\
-    && 'XMLHttpRequest' in window) {
-    var site = new Site();
+
+if (cut && the && mustard) {
+    const site = new Site();
 }
