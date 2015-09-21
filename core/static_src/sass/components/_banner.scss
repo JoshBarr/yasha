@@ -1,15 +1,7 @@
 .banner {
     position: relative;
-    // overflow: hidden;
-    // background-color: #ddd;
-
-    background-position: top right;
-    background-size: 100%;
-    background-repeat: no-repeat;
 
     @include medium {
-        background-position: top right;
-        background-size: cover;
         min-height: 65vh;
         max-height: 630px;
     }
@@ -18,16 +10,6 @@
 .banner-small {
     min-height: 50vh;
 }
-
-.banner-medium {
-    // height: 0;
-    // padding-bottom: 35%;
-
-    .banner__content {
-        // padding-top: 10%;
-    }
-}
-
 
 .banner__text {
     max-width: 25em;
@@ -62,10 +44,7 @@
 
     }
 
-
-
 .banner .site-nav {
-    // position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -73,14 +52,9 @@
 }
 
 .banner__content {
-    // position: relative;
-    // top: 0;
-    // left: 0;
-    margin-top: 30%;
 
     @include medium {
-        margin-top: 0;
-        // margin-top: 2em;
+        position: relative;
         background-color: transparent;
         max-width: 55%;
 
@@ -90,3 +64,26 @@
     }
 }
 
+.banner__image-small {
+
+    @include medium {
+        display: none;
+    }
+}
+
+.banner__image-large {
+    display: none;
+
+    @include medium {
+        background-position: top right;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}

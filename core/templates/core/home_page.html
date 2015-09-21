@@ -9,9 +9,13 @@
 
     {% image self.banner_image width-1300 as hero %}
 
-    <div class="banner banner--inverse banner-large" style="background-image: url({{ hero.url }});">
+    <div class="banner banner--inverse banner-large">
 
         {% navigation_menu 'top' self %}
+        <div class="banner__image-large"  style="background-image: url({{ hero.url }});"></div>
+        <div class="banner__image-small img-responsive">
+            <img class="" src="{{  hero.url  }}" alt="">
+        </div>
 
         <div class="banner__content gutters section">
             <h1>
@@ -70,7 +74,7 @@
                     <div class='u-left'>
                         <div class="grid-float">
                             <div class="medium-one-third">
-                                <p>
+                                <p class="img-responsive">
                                     {% image section.image width-400 %}
                                 </p>
                             </div>

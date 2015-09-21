@@ -50,9 +50,8 @@ h6 {
     }
 }
 
-
 h1 {
-    font-size: rem(28);
+    font-size: rem(24);
 
     @include medium {
         font-size: rem(32);
