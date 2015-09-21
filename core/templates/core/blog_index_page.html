@@ -7,7 +7,7 @@
 
 {% block content %}
 
-    <div class="banner banner-medium banner--inverse">
+    <div class="banner banner--inverse {% if self.large_banner %}banner-large{% else %}banner-medium{% endif %}">
 
         {% navigation_menu 'top' self %}
         {% include "core/includes/banner_image.html" %}
