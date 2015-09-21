@@ -36,7 +36,9 @@
 
             {% for stat in self.statistics.all %}
                 <div class="medium-one-third">
-                    {% image stat.image width-400 %}
+                    <div class="metric__image img-responsive">
+                        {% image stat.image width-400 %}
+                    </div>
                     <h2 class='metric'>{{ stat.statistic}}</h2>
                     <p class='metric__caption'>{{ stat.caption}}</p>
                 </div>
