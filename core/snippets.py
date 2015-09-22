@@ -219,7 +219,7 @@ class Footer(models.Model):
         return self.title
 
     class Meta:
-        verbose_name = "Footer content"
+        verbose_name = "Footer"
         description = "Info that belongs in the site footer."
 
     search_fields = [
