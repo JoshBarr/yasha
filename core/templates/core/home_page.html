@@ -27,10 +27,12 @@
 
     <div class="content">
         <div class="gutters section u-center">
-            <h3>{{ self.statistics_headline }}</h3>
-            {% if self.statistics_body %}
-            <p>{{ self.statistics_body }}</p>
-            {% endif %}
+            <div class="prose u-center">
+                <h3>{{ self.statistics_headline }}</h3>
+                {% if self.statistics_body %}
+                <p>{{ self.statistics_body }}</p>
+                {% endif %}
+            </div>
 
             <div class="grid-float">
 

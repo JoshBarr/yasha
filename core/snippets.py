@@ -5,6 +5,8 @@ from wagtail.wagtailadmin.edit_handlers import InlinePanel, FieldPanel, MultiFie
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.wagtailcore.models import Orderable
+from wagtail.wagtailcore.fields import RichTextField
+
 
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailsearch import index
@@ -189,6 +191,7 @@ class Footer(models.Model):
     address = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=20)
     text = models.CharField(max_length=255)
+    partner_text = RichTextField(max_length=255, blank=True)
 
     contact_link = models.ForeignKey(
         'wagtailcore.Page',
@@ -209,6 +212,7 @@ class Footer(models.Model):
         PageChooserPanel('contact_link'),
         FieldPanel('signup_title'),
         FieldPanel('signup_text'),
+        FieldPanel('partner_text'),
     ]
 
     def __str__(self):              # __unicode__ on Python 2
@@ -224,5 +228,6 @@ class Footer(models.Model):
         index.SearchField('email_address', partial_match=True),
         index.SearchField('signup_title', partial_match=True),
         index.SearchField('signup_text', partial_match=True),
+        index.SearchField('partner_text', partial_match=True),
     ]
 

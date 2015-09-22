@@ -124,9 +124,18 @@ select {
 }
 
 // small,
-.small {
+.small,
+.small > .rich-text > p {
     font-size: 14px;
     // li, p {
     //     font-size: 13px;
     // }
 }
+
+.tiny,
+.tiny > .rich-text > p {
+    font-size: 13px;
+    margin-bottom: .25rem;
+}
+
+

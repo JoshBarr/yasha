@@ -1,3 +1,5 @@
+{% load wagtailcore_tags %}
+
 <div class="footer section">
     <div class="gutters">
         <h4>{{ footer.title|default:'Yasha' }}</h4>
@@ -31,15 +33,15 @@
 
         <hr>
 
-        <p class='u-tight'>
-            {#<span class="icon"><svg><use xlink:href="#facebook" /></svg></span>#}
-            <small>
-                Yasha is partnered with <a class='footer-link' href="//www.globalvolunteernetwork.org/" target="_blank">GVN</a> in the USA.
-            </small>
-        </p>
+        {% if footer.partner_text %}
+        <div class='u-tight footer-link-container tiny'>
+            {{  footer.partner_text|richtext }}
+        </div>
+        {% endif %}
+
         <p>
             <small>
-                © 2015 Yasha Ministries,
+                © {% now "Y" %} Yasha Ministries,
             </small>
             <small>
                 site by <a class='footer-link' href="//joshbarr.com" title="">Josh Barr</a>.

@@ -4,7 +4,8 @@
 
 $footer-link-color: #806e46;
 
-.footer-link {
+.footer-link,
+.footer-link-container a {
     color: $footer-link-color;
     text-decoration: underline;
 
