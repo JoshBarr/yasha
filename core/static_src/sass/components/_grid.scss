@@ -100,6 +100,11 @@ $grid-row-spacing: 1.5rem;
         padding-left: 10%;
         padding-right: 10%;
     }
+
+    @include xlarge {
+        padding-left: 15%;
+        padding-right: 15%;
+    }
 }
 
 

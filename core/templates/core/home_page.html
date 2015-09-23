@@ -10,7 +10,7 @@
     <div class="banner banner--inverse banner-large">
 
         {% navigation_menu 'top' self %}
-        {% include "core/includes/banner_image.html" %}
+        {% include "core/includes/banner_image.html"  with position='center' %}
 
         <div class="banner__content gutters section">
             <h1>
@@ -33,7 +33,6 @@
                 <p>{{ self.statistics_body }}</p>
                 {% endif %}
             </div>
-
             <div class="grid-float">
 
             {% for stat in self.statistics.all %}
@@ -60,14 +59,13 @@
                         “{{ self.quote }}”
                     </em>
                 </h3>
-
                 <cite>{{ self.citation }}</cite>
                 </div>
             </div>
         </div>
         <div class='section panel gutters'>
             <h2 class='u-center u-space-large'>What we do</h2>
-            <div class=" u-auto">
+            <div class="home-sections u-auto">
                 <div class="grid-float u-space-large">
                 {% for section in self.sections.all %}
                     <div class='u-left'>

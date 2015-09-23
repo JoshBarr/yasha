@@ -3,7 +3,7 @@
 
     @include medium {
         min-height: 65vh;
-        max-height: 630px;
+        // max-height: 630px;
     }
 }
 
@@ -103,6 +103,9 @@
     background-position: bottom right;
 }
 
+.banner__image-center {
+    background-position: center right;
+}
 
 .banner--blog {
     background-color: #8A9E6C;

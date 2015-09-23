@@ -16,6 +16,8 @@
     background-color: #fff;
 }
 
+$section-padding-xlarge: 5%;
+
 .section {
     padding-top: 2em;
     padding-bottom: 2em;
@@ -23,6 +25,11 @@
     @include medium {
         padding-top: 4em;
         padding-bottom: 4em;
+    }
+
+    @include xlarge {
+        padding-top: $section-padding-xlarge;
+        padding-bottom: $section-padding-xlarge;
     }
 }
 
@@ -32,6 +39,10 @@
     @include medium {
         padding-top: 4em;
     }
+
+    @include xlarge {
+        padding-top: $section-padding-xlarge;
+    }
 }
 
 .section-bottom {
@@ -39,6 +50,10 @@
 
     @include medium {
         padding-bottom: 4em;
+    }
+
+    @include xlarge {
+        padding-bottom: $section-padding-xlarge;
     }
 }
 
