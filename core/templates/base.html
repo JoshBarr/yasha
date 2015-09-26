@@ -12,7 +12,7 @@
         <!-- open graph -->
         <meta property="og:url" content="{{ BASE_URL }}{% if self %}{% pageurl self %}{% endif %}" />
         <meta property="og:title" content="{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}" />
-        <meta property="og:description" content="{% if self.search_description %}{{ self.search_description }}{% elif self.intro %}{{ self.intro }}{% elif self.body_excerpt %}{{ self.body_excerpt|truncatewords:40 }}{% else %}{{ self.title }}{% endif %}" />
+        <meta property="og:description" content="{% if self.search_description %}{{ self.search_description }}{% elif self.intro %}{{ self.intro|striptags }}{% elif self.body_excerpt %}{{ self.body_excerpt|truncatewords:40 }}{% else %}{{ self.title }}{% endif %}" />
         {% block og_images %}
             {% if self.og_image and self.og_image.image %}
                 {% image self.og_image.image width-400 as tmp_og_image %}
