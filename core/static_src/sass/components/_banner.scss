@@ -57,15 +57,16 @@
     @include medium {
         position: relative;
         background-color: transparent;
-        max-width: 62%;
+        max-width: 60%;
 
         &.-wide {
             max-width: 50rem;
         }
     }
 
+    // This is nit picking... should probably rationalise further.
     @include large {
-        max-width: 55%;
+        max-width: 58%;
     }
 }
 
