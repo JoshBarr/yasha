@@ -57,11 +57,15 @@
     @include medium {
         position: relative;
         background-color: transparent;
-        max-width: 55%;
+        max-width: 62%;
 
         &.-wide {
             max-width: 50rem;
         }
+    }
+
+    @include large {
+        max-width: 55%;
     }
 }
 
