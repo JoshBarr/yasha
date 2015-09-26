@@ -1,6 +1,7 @@
 from datetime import timedelta, date
 
 import re
+import os
 
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
@@ -176,6 +177,13 @@ class HomePage(Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    feed_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
     quote = models.CharField(max_length=255, default='', help_text="The big homepage quote")
     citation = models.CharField(max_length=255, default='', help_text="Who authored the quote")
     statistics_headline = models.CharField(max_length=255, default='', help_text="Headline for the issue block")
@@ -191,7 +199,25 @@ class HomePage(Page):
     what_we_do_headline = models.CharField(max_length=255, default='', help_text="Top of the what we do section")
 
     # date = models.DateField("Post date", default=date.today)
-    search_fields = ()
+    search_fields = (
+        index.SearchField('intro_text', boost=1),
+        index.SearchField('quote_text', boost=1)
+    )
+
+    @property
+    def og_image(self):
+        # Returns image and image type of feed_image or image as fallback, if exists
+        image = {'image': None, 'type': None}
+        if self.feed_image:
+            image['image'] = self.feed_image
+        elif self.image:
+            image['image'] = self.image
+        elif self.banner_image:
+            image['image'] = self.banner_image
+        name, extension = os.path.splitext(image['image'].file.url)
+        image['type'] = extension[1:]
+        print image
+        return image
 
     def get_context(self, request):
         # Get pages
@@ -221,7 +247,8 @@ HomePage.content_panels = [
 HomePage.promote_panels = [
     FieldPanel('slug'),
     FieldPanel('seo_title'),
-    FieldPanel('search_description')
+    FieldPanel('search_description'),
+    ImageChooserPanel('feed_image'),
 ]
 
 
@@ -332,6 +359,8 @@ class YashaPage(Page):
             image['image'] = self.feed_image
         elif self.image:
             image['image'] = self.image
+        elif self.banner_image:
+            image['image'] = self.banner_image
         name, extension = os.path.splitext(image['image'].file.url)
         image['type'] = extension[1:]
         return image
